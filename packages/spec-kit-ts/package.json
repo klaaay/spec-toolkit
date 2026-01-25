@@ -11,7 +11,7 @@
     "typecheck": "tsc --noEmit"
   },
   "bin": {
-    "specify-ts": "./dist/index.js"
+    "spec-ts": "./dist/index.js"
   },
   "keywords": [
     "cli",
