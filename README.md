@@ -2,7 +2,7 @@
 
 Spec ToolKit 是面向 Spec-Driven Development (SDD) 的工具包与工作流集合，包含 CLI、文档站、命令包与工程化配置。
 
-English -> [README.en.md](README.en.md)
+English -> [README.en.md](README.en.md) / 日本語 -> [README.ja.md](README.ja.md)
 
 内置 SDD 规范来源：https://github.com/github/spec-kit  
 文档站点：https://spec-toolkit-spec-kit-app.vercel.app/
