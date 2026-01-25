@@ -3,6 +3,7 @@
 Spec ToolKit is a toolkit and workflow suite for Spec-Driven Development (SDD), with a CLI, docs site, command packages, and shared configs.
 
 Built-in SDD spec source: https://github.com/github/spec-kit
+Docs site: https://spec-toolkit-spec-kit-app.vercel.app/
 
 ## What's inside
 
