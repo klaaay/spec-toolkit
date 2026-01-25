@@ -1,0 +1,33 @@
+{
+  "name": "spec-toolkit",
+  "private": true,
+  "packageManager": "pnpm@10.20.0",
+  "scripts": {
+    "build": "pnpm -r --if-present run build",
+    "commitlint": "commitlint",
+    "eslint": "eslint \"{apps,packages,configs}/**/*.{js,ts,tsx}\"",
+    "eslint:inspector": "npx @eslint/config-inspector",
+    "lint": "pnpm -r --if-present run lint",
+    "lint-staged": "lint-staged",
+    "prepare": "husky install && pnpm --filter @klaaay/eslint-config run build",
+    "test": "pnpm -r --if-present run test"
+  },
+  "lint-staged": {
+    "{apps,packages,configs}/**/*.{js,jsx,ts,tsx}": "eslint --fix",
+    "{apps,packages,configs}/**/*.{js,jsx,ts,tsx,css,less,scss,sass}": [
+      "prettier --write"
+    ]
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.6.3",
+    "@commitlint/config-conventional": "^17.6.3",
+    "@klaaay/eslint-config": "workspace:*",
+    "@types/node": "^20.10.8",
+    "@typescript-eslint/eslint-plugin": "^8.27.0",
+    "@typescript-eslint/parser": "^8.27.0",
+    "eslint": "^9.22.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.0",
+    "prettier": "^3.5.3"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "name": "@klaaay/spec-kit-ts",
+  "version": "0.2.0",
+  "description": "Specify CLI 的 TypeScript 实现 - Spec-Driven Development 工具包",
+  "type": "module",
+  "module": "dist/index.js",
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "start": "node dist/index.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "bin": {
+    "specify-ts": "./dist/index.js"
+  },
+  "keywords": [
+    "cli",
+    "spec-driven-development",
+    "template",
+    "workflow"
+  ],
+  "files": [
+    "dist/**/*",
+    "dist/**/.*",
+    "!dist/**/*.map"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "klay",
+  "license": "MIT",
+  "dependencies": {
+    "@inkjs/ui": "^2.0.0",
+    "@types/extract-zip": "^2.0.3",
+    "axios": "^1.8.4",
+    "chalk": "^5.4.1",
+    "commander": "^13.1.0",
+    "liquidjs": "^10.17.1",
+    "execa": "^9.5.2",
+    "extract-zip": "^2.0.1",
+    "ink": "^5.2.0",
+    "ora": "^8.1.1",
+    "react": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "@types/react": "^18.3.20",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.3"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "name": "@klaaay/eslint-config",
+  "version": "2.8.5",
+  "description": "",
+  "scripts": {
+    "dev": "tsc -w",
+    "build": "rimraf dist && tsc"
+  },
+  "exports": {
+    "./package.json": "./package.json",
+    "./react": "./react.js",
+    "./recommended": "./recommended.js"
+  },
+  "keywords": [],
+  "author": "klay",
+  "license": "ISC",
+  "files": [
+    "dist",
+    "react.js",
+    "recommended.js"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@eslint/compat": "^1.3.2",
+    "@typescript-eslint/eslint-plugin": "^8.39.0",
+    "@typescript-eslint/parser": "^8.39.0",
+    "@typescript-eslint/types": "^8.39.0",
+    "eslint": "^9.33.0",
+    "eslint-plugin-command": "^0.2.7",
+    "@klaaay/eslint-plugin": "workspace:*",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-func": "^0.1.18",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-web-api": "^1.52.3",
+    "eslint-plugin-unused-imports": "^4.1.4",
+    "globals": "^15.15.0"
+  },
+  "devDependencies": {
+    "rimraf": "^6.0.1"
+  },
+  "peerDependencies": {
+    "eslint": ">=9",
+    "typescript": ">=5"
+  }
+}

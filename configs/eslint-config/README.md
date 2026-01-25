@@ -1,0 +1,2 @@
+# @klaaay/eslint-config
+

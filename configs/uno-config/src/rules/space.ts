@@ -1,0 +1,30 @@
+export const COMMON_SPACE_TYPES = {
+  m: 'margin',
+  mx: ['margin-left', 'margin-right'],
+  my: ['margin-top', 'margin-bottom'],
+  mt: 'margin-top',
+  mr: 'margin-right',
+  mb: 'margin-bottom',
+  ml: 'margin-left',
+  p: 'padding',
+  px: ['padding-left', 'padding-right'],
+  py: ['padding-top', 'padding-bottom'],
+  pt: 'padding-top',
+  pr: 'padding-right',
+  pb: 'padding-bottom',
+  pl: 'padding-left',
+  g: 'gap',
+  gap: 'gap',
+};
+
+export const COMMON_SPACE_UNITS = {
+  xxl: 'var(--margin-xxl)',
+  xl: 'var(--margin-xl)',
+  lg: 'var(--margin-lg)',
+  md: 'var(--margin-md)',
+  '': 'var(--margin)',
+  base: 'var(--margin-base)',
+  sm: 'var(--margin-sm)',
+  xs: 'var(--margin-xs)',
+  xxs: 'var(--margin-xxs)',
+};

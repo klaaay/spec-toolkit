@@ -1,0 +1,10 @@
+node_modules
+pages
+.dockerignore
+.npmrc
+Dockerfile
+docker.sh
+next.config.js
+package.json
+readme.md
+theme.config.tsx

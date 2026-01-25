@@ -1,0 +1,7 @@
+src
+!src/spec-kit-templates
+node_modules
+*.log
+.DS_Store
+tsconfig.json
+tsup.config.ts

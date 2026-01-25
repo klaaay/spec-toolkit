@@ -1,0 +1,35 @@
+{
+  "package": "brainstorm-spec",
+  "version": "1.0.0",
+  "category": "SDD-Spec开发",
+  "commands": [
+    {
+      "id": "brainstorm-spec.brainstorm",
+      "file": "commands/brainstorm-spec.brainstorm.liquid.md",
+      "output": ".specify/templates/commands/brainstorm-spec.brainstorm.md",
+      "description": "三阶段梳理与呈现设计思路（理解→探索→分段陈述）。",
+      "requires": []
+    },
+    {
+      "id": "brainstorm-spec.save-design",
+      "file": "commands/brainstorm-spec.save-design.liquid.md",
+      "output": ".specify/templates/commands/brainstorm-spec.save-design.md",
+      "description": "把 /spec:brainstorm 会话提炼为设计文档并落盘。",
+      "requires": []
+    },
+    {
+      "id": "brainstorm-spec.write-plan",
+      "file": "commands/brainstorm-spec.write-plan.liquid.md",
+      "output": ".specify/templates/commands/brainstorm-spec.write-plan.md",
+      "description": "将已确定方案转为可执行的实现计划。",
+      "requires": []
+    },
+    {
+      "id": "brainstorm-spec.execute-plan",
+      "file": "commands/brainstorm-spec.execute-plan.liquid.md",
+      "output": ".specify/templates/commands/brainstorm-spec.execute-plan.md",
+      "description": "按计划分批执行、校验并回报进度。",
+      "requires": []
+    }
+  ]
+}

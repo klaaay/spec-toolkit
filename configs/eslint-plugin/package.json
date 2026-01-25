@@ -1,0 +1,20 @@
+{
+  "name": "@klaaay/eslint-plugin",
+  "version": "1.6.4",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "klay",
+  "license": "ISC",
+  "files": [
+    "rules",
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "eslint": "^9.33.0"
+  }
+}
