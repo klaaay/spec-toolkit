@@ -2,7 +2,7 @@
 
 Spec ToolKit is a toolkit and workflow suite for Spec-Driven Development (SDD), with a CLI, docs site, command packages, and shared configs.
 
-Built-in SDD spec source: https://github.com/github/spec-kit
+Built-in SDD spec source: https://github.com/github/spec-kit  
 Docs site: https://spec-toolkit-spec-kit-app.vercel.app/
 
 ## What's inside
@@ -48,21 +48,21 @@ Docs site: https://spec-toolkit-spec-kit-app.vercel.app/
 
 These keys are used by `--ai`.
 
-| Key | Name | Requires CLI |
-| --- | --- | --- |
-| `claude` | Claude Code | yes |
-| `gemini` | Gemini CLI | yes |
-| `copilot` | GitHub Copilot | no |
-| `cursor-agent` | Cursor | no |
-| `qwen` | Qwen Code | yes |
-| `opencode` | Opencode | yes |
-| `windsurf` | Windsurf | no |
-| `codex` | Codex CLI | yes |
-| `kilocode` | Kilo Code | no |
-| `auggie` | Auggie CLI | yes |
-| `roo` | Roo Code | no |
-| `codebuddy` | CodeBuddy | yes |
-| `q` | Amazon Q Developer CLI | yes |
+| Key            | Name                   | Requires CLI |
+| -------------- | ---------------------- | ------------ |
+| `claude`       | Claude Code            | yes          |
+| `gemini`       | Gemini CLI             | yes          |
+| `copilot`      | GitHub Copilot         | no           |
+| `cursor-agent` | Cursor                 | no           |
+| `qwen`         | Qwen Code              | yes          |
+| `opencode`     | Opencode               | yes          |
+| `windsurf`     | Windsurf               | no           |
+| `codex`        | Codex CLI              | yes          |
+| `kilocode`     | Kilo Code              | no           |
+| `auggie`       | Auggie CLI             | yes          |
+| `roo`          | Roo Code               | no           |
+| `codebuddy`    | CodeBuddy              | yes          |
+| `q`            | Amazon Q Developer CLI | yes          |
 
 ## Scripts
 
