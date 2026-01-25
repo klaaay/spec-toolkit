@@ -50,7 +50,7 @@ const initOptions = [
 const pullPackageOptions = [
   {
     flag: '--registry <url>',
-    description: '命令包源地址，默认 http://localhost:3000/commands-packages。',
+    description: '命令包源地址，默认 https://spec-toolkit-spec-kit-app.vercel.app/commands-packages。',
   },
   { flag: '--ai <agent>', description: '必选。指定要同步命令的 AI 助手。' },
   {

@@ -1,6 +1,6 @@
 import { ScriptMap } from '../types/pull-package.js';
 
-export const DEFAULT_REGISTRY_URL = 'http://localhost:3000/commands-packages';
+export const DEFAULT_REGISTRY_URL = 'https://spec-toolkit-spec-kit-app.vercel.app/commands-packages';
 
 export const CHECK_PREREQUISITES_SCRIPT_MAP: ScriptMap = {
   sh: 'scripts/bash/check-prerequisites.sh --json --paths-only',
