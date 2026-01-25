@@ -185,7 +185,7 @@ export async function pullPackageCommand(packageName: string | undefined, option
   const commandsRoot = join(templatesRoot, 'commands');
 
   if (!existsSync(templatesRoot)) {
-    showError('缺少 Specify 模板', `未找到 ${templatesRoot}\n请先运行 specify-ts init 初始化项目`);
+    showError('缺少 Specify 模板', `未找到 ${templatesRoot}\n请先运行 spec-ts init 初始化项目`);
     process.exit(1);
   }
 

@@ -204,8 +204,8 @@ export async function initCommand(projectName: string | undefined, options: Init
     nextStepIndex += 1;
     console.log(`${nextStepIndex}. 安装更多命令包（可选）：`);
     console.log(`   访问命令包仓库：${chalk.cyan(DEFAULT_REGISTRY_URL)}`);
-    console.log(`   使用 ${chalk.cyan('specify-ts pull-package <包名> --ai ' + selectedAi)} 安装命令包`);
-    console.log(`   示例：${chalk.cyan('specify-ts pull-package fe --ai ' + selectedAi)} - 安装前端工程化命令包`);
+    console.log(`   使用 ${chalk.cyan('spec-ts pull-package <包名> --ai ' + selectedAi)} 安装命令包`);
+    console.log(`   示例：${chalk.cyan('spec-ts pull-package fe --ai ' + selectedAi)} - 安装前端工程化命令包`);
     console.log();
     // console.log(`   - ${chalk.cyan('/speckit.fe-rule.wizard')} - 交互式完善前端工程规则模板`);
     // console.log(`   - ${chalk.cyan('/speckit.fe-rule.scan')} - 扫描仓库推断前端工程规则`);

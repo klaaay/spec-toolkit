@@ -166,7 +166,7 @@ export default function Home() {
               核心设计亮点：支持从远端仓库动态拉取结构化命令包，实现命令能力的扩展和定制。
             </p>
             <div className="bg-gray-50 rounded p-3 mb-3">
-              <code className="text-sm text-gray-800">specify-ts pull-package [packageName]</code>
+              <code className="text-sm text-gray-800">spec-ts pull-package [packageName]</code>
             </div>
             <p className="text-sm text-gray-600 mb-3">
               命令包可以包含自定义的斜杠命令、模板和配置，根据不同 AI 助手和脚本类型自动适配。
@@ -222,13 +222,13 @@ export default function Home() {
               初始化项目
             </h3>
             <p className="text-sm text-gray-600 mb-2">创建新项目目录：</p>
-            <CodeBlock language="bash" code={`specify-ts init my-project --ai claude`} />
+            <CodeBlock language="bash" code={`spec-ts init my-project --ai claude`} />
             <p className="text-sm text-gray-600 mt-3 mb-2">
               或在当前项目目录初始化（使用 <code className="bg-white px-1.5 py-0.5 rounded text-xs">.</code> 或{' '}
               <code className="bg-white px-1.5 py-0.5 rounded text-xs">--here</code>
               ）：
             </p>
-            <CodeBlock language="bash" code={`specify-ts init . --ai claude`} />
+            <CodeBlock language="bash" code={`spec-ts init . --ai claude`} />
             <p className="text-xs text-gray-500 mt-2">
               其中 <code className="bg-white px-1.5 py-0.5 rounded text-xs">--ai</code> 参数需要填写支持的 AI
               助手键名（如
@@ -247,7 +247,7 @@ export default function Home() {
               </span>
               拉取命令包（可选）
             </h3>
-            <CodeBlock language="bash" code={`specify-ts pull-package fe --ai claude`} />
+            <CodeBlock language="bash" code={`spec-ts pull-package fe --ai claude`} />
             <p className="text-sm text-gray-600 mt-2">
               从远端拉取前端规范命令包（需通过 <code className="bg-white px-1.5 py-0.5 rounded text-xs">--ai</code> 指定
               AI 助手，如 <code className="bg-white px-1.5 py-0.5 rounded text-xs">claude</code>
@@ -278,7 +278,7 @@ export default function Home() {
             <CodeBlock language="bash" code={`/speckit.specify 构建一个待办事项管理应用...`} />
             <p className="text-sm text-gray-600 mb-2">
               如果你希望使用自定义命令包中的斜杠命令，可以先通过
-              <code className="bg-white px-1.5 py-0.5 rounded text-xs mx-1">specify-ts pull-package [packageName]</code>
+              <code className="bg-white px-1.5 py-0.5 rounded text-xs mx-1">spec-ts pull-package [packageName]</code>
               拉取命令包，然后前往
               <Link href="/commands-packages" className="text-blue-600 hover:underline mx-1">
                 命令包广场

@@ -587,7 +587,7 @@ export function CommandsPackagesExplorer({ root }: ExplorerProps) {
                 <div className="text-sm font-semibold text-foreground">最终指令</div>
                 <CodeBlock
                   language="bash"
-                  code={`specify-ts pull-package ${installDialog.name} --ai ${selectedAi}${
+                  code={`spec-ts pull-package ${installDialog.name} --ai ${selectedAi}${
                     selectedScript === 'auto' ? '' : ` --script ${selectedScript}`
                   }`}
                 />

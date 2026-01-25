@@ -42,7 +42,7 @@ function logVersionInfo(): void {
 }
 
 program
-  .name('specify-ts')
+  .name('spec-ts')
   .description('Specify CLI - Spec-Driven Development 工具包')
   .version(`v${cliVersion}`, '-v, --version', '显示 CLI 版本信息')
   .hook('preAction', () => {

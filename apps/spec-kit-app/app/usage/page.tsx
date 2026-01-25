@@ -75,7 +75,7 @@ export default function UsagePage() {
       <header>
         <h1 className="text-3xl font-bold mb-2">Specify CLI 使用指南</h1>
         <p className="text-gray-600">
-          Specify CLI（命令名为 <code>specify-ts</code>
+          Specify CLI（命令名为 <code>spec-ts</code>
           ）提供项目初始化、工具检测与命令包同步能力。下文内容依据 CLI 参数与默认行为整理，便于快速上手并避免常见误用。
         </p>
       </header>
@@ -103,7 +103,7 @@ export default function UsagePage() {
       <section className="p-6 bg-white rounded-lg shadow-sm border space-y-4">
         <h2 className="text-2xl font-semibold">基础命令</h2>
         <p>安装完成后可通过帮助命令快速查看所有子命令与参数说明。CLI 在未指定子命令时会自动输出帮助信息。</p>
-        <CodeBlock language="bash" code={`specify-ts --help\nspecify-ts --version`} />
+        <CodeBlock language="bash" code={`spec-ts --help\nspec-ts --version`} />
       </section>
 
       <section className="p-6 bg-white rounded-lg shadow-sm border space-y-4">
@@ -136,12 +136,12 @@ export default function UsagePage() {
       <section className="p-6 bg-white rounded-lg shadow-sm border space-y-4">
         <h2 className="text-2xl font-semibold">项目初始化：init</h2>
         <p>
-          <code>specify-ts init</code> 会根据选择的 AI 助手与脚本类型复制模板、配置脚本权限并初始化 Git 仓库。
+          <code>spec-ts init</code> 会根据选择的 AI 助手与脚本类型复制模板、配置脚本权限并初始化 Git 仓库。
         </p>
         <div className="space-y-3">
           <div>
             <p className="font-medium">在新目录创建项目：</p>
-            <CodeBlock language="bash" code={`specify-ts init my-spec-project --ai claude --script sh`} />
+            <CodeBlock language="bash" code={`spec-ts init my-spec-project --ai claude --script sh`} />
           </div>
           <div>
             <p className="font-medium">在当前项目目录下直接初始化：</p>
@@ -150,7 +150,7 @@ export default function UsagePage() {
               ，会将模板合并到现有目录中，适用于已经存在的仓库。如目录非空，CLI 会提示覆盖风险，可结合{' '}
               <code>--force</code> 跳过确认。
             </p>
-            <CodeBlock language="bash" code={`specify-ts init . --ai claude --script sh`} />
+            <CodeBlock language="bash" code={`spec-ts init . --ai claude --script sh`} />
           </div>
         </div>
         <div>
@@ -171,20 +171,20 @@ export default function UsagePage() {
       <section className="p-6 bg-white rounded-lg shadow-sm border space-y-4">
         <h2 className="text-2xl font-semibold">环境检查：check</h2>
         <p>
-          <code>specify-ts check</code> 用于检查 Git、所有内置 AI 助手 CLI 以及 VS Code 是否安装，确保运行环境准备就绪。
+          <code>spec-ts check</code> 用于检查 Git、所有内置 AI 助手 CLI 以及 VS Code 是否安装，确保运行环境准备就绪。
         </p>
-        <CodeBlock language="bash" code="specify-ts check" />
+        <CodeBlock language="bash" code="spec-ts check" />
         <p className="text-gray-600 text-sm">建议在首次安装 CLI 或更新工具链后执行，以便快速定位缺少的依赖。</p>
       </section>
 
       <section className="p-6 bg-white rounded-lg shadow-sm border space-y-4">
         <h2 className="text-2xl font-semibold">命令包同步：pull-package</h2>
         <p>
-          <code>specify-ts pull-package</code> 会从命令包仓库拉取最新模板，并根据 AI
+          <code>spec-ts pull-package</code> 会从命令包仓库拉取最新模板，并根据 AI
           助手与脚本类型渲染斜杠命令。未指定包名时默认使用
           <code>fe</code>。
         </p>
-        <CodeBlock language="bash" code={`specify-ts pull-package fe --ai claude --script sh`} />
+        <CodeBlock language="bash" code={`spec-ts pull-package fe --ai claude --script sh`} />
         <div>
           <h3 className="text-xl font-medium mb-2">常用参数</h3>
           <ul className="list-disc list-inside space-y-1">

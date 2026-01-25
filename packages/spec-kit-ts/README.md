@@ -28,25 +28,25 @@ npm install -g @klaaay/spec-kit-ts
 
 ```bash
 # 基本用法
-specify-ts init my-project --ai claude
+spec-ts init my-project --ai claude
 
 # 在当前目录初始化
-specify-ts init . --ai copilot
+spec-ts init . --ai copilot
 
 # 或使用 --here 标志
-specify-ts init --here --ai claude
+spec-ts init --here --ai claude
 
 # 跳过 git 初始化
-specify-ts init my-project --ai claude --no-git
+spec-ts init my-project --ai claude --no-git
 
 # 强制合并到非空目录
-specify-ts init . --ai claude --force
+spec-ts init . --ai claude --force
 ```
 
 ### 检查工具安装
 
 ```bash
-specify-ts check
+spec-ts check
 ```
 
 ## 支持的 AI 助手
