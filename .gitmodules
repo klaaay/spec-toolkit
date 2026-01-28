@@ -1,0 +1,3 @@
+[submodule "eevee-agent-skills"]
+	path = eevee-agent-skills
+	url = ssh://git@gitlab.leihuo.netease.com:32200/frontend/eevee/eevee-agent-skills.git
