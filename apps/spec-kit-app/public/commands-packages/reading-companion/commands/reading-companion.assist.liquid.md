@@ -1,5 +1,6 @@
 ---
 description: 书籍伴读助手，提供章节总结、内在联系分析、问题解答与思维发散。
+noSpeckitPrefix: true
 ---
 
 ## 用户输入
