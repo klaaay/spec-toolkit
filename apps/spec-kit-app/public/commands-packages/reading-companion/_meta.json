@@ -1,0 +1,14 @@
+{
+  "package": "reading-companion",
+  "version": "1.0.0",
+  "category": "阅读",
+  "commands": [
+    {
+      "id": "reading-companion.assist",
+      "file": "commands/reading-companion.assist.liquid.md",
+      "output": ".specify/templates/commands/reading-companion.assist.md",
+      "description": "书籍伴读助手：章节总结、章节关系分析、问题解答与思维发散。",
+      "requires": []
+    }
+  ]
+}

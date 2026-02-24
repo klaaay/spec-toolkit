@@ -25,7 +25,7 @@ interface ExplorerProps {
 const ROOT_LABEL = 'root';
 
 const FILTERED_MD_FILTERS = ['workflow.md'];
-const CATEGORY_ORDER = ['SDD-Spec开发', '前端开发'];
+const CATEGORY_ORDER = ['SDD-Spec开发', '前端开发', '阅读'];
 const UNCATEGORIZED_LABEL = '未分类';
 const DEFAULT_AI = 'claude';
 const DEFAULT_SCRIPT = 'auto';
