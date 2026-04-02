@@ -10,12 +10,5 @@
       "output": "frontend-contract-implementation/SKILL.md",
       "description": "基于接口契约生成或更新类型、请求封装和页面集成代码，并遵循前端宪法。"
     }
-  ],
-  "mcpServers": {
-    "api-contract-mcp": {
-      "name": "API Contract MCP",
-      "description": "内部接口定义、组件和 hook 信息服务，可用于根据接口 ID 获取权威请求和响应结构。",
-      "docUrl": "https://example.com/api-contract-mcp"
-    }
-  }
+  ]
 }

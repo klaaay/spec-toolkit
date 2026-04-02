@@ -4,7 +4,7 @@
 
 ## 设计目标
 
-- 技术栈保持轻量，沿用 `a lightweight CLI scaffold` 的 `commander + tsup + axios` 组合
+- 技术栈保持轻量，采用 `commander + tsup + axios` 组合
 - 配置持久化到 `~/.figma-toolkit-cli/config.json`
 - 聚焦与 `figma-backend/src/routes/figma/figma.index.ts` 同范围的 4 个官方接口
 
