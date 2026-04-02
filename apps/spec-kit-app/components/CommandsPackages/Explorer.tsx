@@ -335,7 +335,7 @@ export function CommandsPackagesExplorer({ root }: ExplorerProps) {
                 onMouseLeave={() => scheduleMenuClose(item.path)}>
                 <button
                   type="button"
-                  className="rounded-full border border-dashed border-muted-foreground/30 p-1 text-muted-foreground transition-colors hover:border-primary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+                  className="rotate-90 rounded-full border border-dashed border-muted-foreground/30 p-1 text-muted-foreground transition-colors hover:border-primary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
                   aria-label="查看命令包操作"
                   onClick={event => {
                     event.stopPropagation();
