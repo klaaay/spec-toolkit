@@ -6,7 +6,7 @@
 
 - 技术栈保持轻量，采用 `commander + tsup + axios` 组合
 - 配置持久化到 `~/.figma-toolkit-cli/config.json`
-- 聚焦与 `figma-backend/src/routes/figma/figma.index.ts` 同范围的 4 个官方接口
+- 聚焦 Figma 官方 REST API 中最常用的 4 个核心接口
 
 ## 支持的官方接口
 
