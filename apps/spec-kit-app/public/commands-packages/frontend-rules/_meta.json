@@ -1,0 +1,20 @@
+{
+  "package": "frontend-rules",
+  "version": "1.0.0",
+  "category": "前端开发",
+  "commands": [],
+  "skills": [
+    {
+      "id": "frontend-rules-bootstrap",
+      "file": "skills/frontend-rules-bootstrap/SKILL.md",
+      "output": "frontend-rules-bootstrap/SKILL.md",
+      "description": "扫描仓库并对缺口做最小追问，建立或更新前端宪法 `.specify/memory/fe-rule.md`。"
+    },
+    {
+      "id": "frontend-rules-implementation",
+      "file": "skills/frontend-rules-implementation/SKILL.md",
+      "output": "frontend-rules-implementation/SKILL.md",
+      "description": "在已有前端宪法和已确认实施文档的前提下，按既有规范落地前端改动。"
+    }
+  ]
+}

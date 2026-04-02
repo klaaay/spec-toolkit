@@ -72,7 +72,7 @@ digraph tdd_cycle {
 
 编写一个最小测试，展示应该发生什么。
 
-<好>
+<good>
 ```typescript
 test('失败操作重试3次', async () => {
   let attempts = 0;
@@ -89,9 +89,9 @@ test('失败操作重试3次', async () => {
 });
 ```
 名称清晰，测试真实行为，只做一件事
-</好>
+</good>
 
-<坏>
+<bad>
 ```typescript
 test('重试有效', async () => {
   const mock = jest.fn()
@@ -103,7 +103,7 @@ test('重试有效', async () => {
 });
 ```
 名称模糊，测试的是模拟而不是真实代码
-</坏>
+</bad>
 
 **要求：**
 - 一个行为
@@ -131,7 +131,7 @@ npm test path/to/test.test.ts
 
 编写最简单的代码来使测试通过。
 
-<好>
+<good>
 ```typescript
 async function retryOperation<T>(fn: () => Promise<T>): Promise<T> {
   for (let i = 0; i < 3; i++) {
@@ -145,9 +145,9 @@ async function retryOperation<T>(fn: () => Promise<T>): Promise<T> {
 }
 ```
 刚好足够使测试通过
-</好>
+</good>
 
-<坏>
+<bad>
 ```typescript
 async function retryOperation<T>(
   fn: () => Promise<T>,
@@ -161,7 +161,7 @@ async function retryOperation<T>(
 }
 ```
 过度设计
-</坏>
+</bad>
 
 不要添加功能、重构其他代码，或超出测试范围进行"改进"。
 

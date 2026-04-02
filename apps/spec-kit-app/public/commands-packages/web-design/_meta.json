@@ -1,0 +1,32 @@
+{
+  "package": "web-design",
+  "version": "1.0.0",
+  "category": "网页设计",
+  "commands": [],
+  "skills": [
+    {
+      "id": "gsap-core",
+      "file": "skills/gsap-core/SKILL.md",
+      "output": "gsap-core/SKILL.md",
+      "description": "GSAP 核心动画能力说明，覆盖 gsap.to()、from()、fromTo()、缓动、错峰、默认配置、响应式与 prefers-reduced-motion。适合在 React、Vue、原生 JavaScript 等场景中编写或审查基础动画。"
+    },
+    {
+      "id": "design-dna",
+      "file": "skills/design-dna/SKILL.md",
+      "output": "design-dna/SKILL.md",
+      "description": "Design DNA 设计分析与生成技能，用于从截图、图片或网页链接中提取设计系统、设计风格与视觉特效，并将其结构化后应用到新的网页设计实现中。"
+    },
+    {
+      "id": "design-dna.references.schema",
+      "file": "skills/design-dna/references/schema.md",
+      "output": "design-dna/references/schema.md",
+      "description": "Design DNA 的完整 schema，定义设计系统、设计风格与视觉特效三个维度的字段结构。"
+    },
+    {
+      "id": "design-dna.references.generation-guide",
+      "file": "skills/design-dna/references/generation-guide.md",
+      "output": "design-dna/references/generation-guide.md",
+      "description": "Design DNA 第三阶段生成指南，说明如何把 DNA JSON 映射为 HTML、CSS、JavaScript 和视觉特效实现。"
+    }
+  ]
+}

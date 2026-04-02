@@ -1,0 +1,14 @@
+{
+  "package": "frontend-contract",
+  "version": "1.0.0",
+  "category": "前端开发",
+  "commands": [],
+  "skills": [
+    {
+      "id": "frontend-contract-implementation",
+      "file": "skills/frontend-contract-implementation/SKILL.md",
+      "output": "frontend-contract-implementation/SKILL.md",
+      "description": "基于接口契约生成或更新类型、请求封装和页面集成代码，并遵循前端宪法。"
+    }
+  ]
+}

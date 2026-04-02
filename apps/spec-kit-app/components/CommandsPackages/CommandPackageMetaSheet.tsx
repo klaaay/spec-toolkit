@@ -1,7 +1,44 @@
 'use client';
 
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '@/components/ui/sheet';
-import type { PackageMeta } from '@/lib/commands-packages';
+import type { PackageMeta, PackageMetaSkill } from '@/lib/commands-packages';
+
+interface DisplaySkill extends PackageMetaSkill {
+  references?: PackageMetaSkill[];
+}
+
+function groupSkills(skills: PackageMetaSkill[]): DisplaySkill[] {
+  const parentSkills = new Map<string, DisplaySkill>();
+  const standaloneSkills: DisplaySkill[] = [];
+
+  for (const skill of skills) {
+    if (skill.id.includes('.references.')) {
+      continue;
+    }
+
+    parentSkills.set(skill.id, { ...skill });
+  }
+
+  for (const skill of skills) {
+    const referenceIndex = skill.id.indexOf('.references.');
+
+    if (referenceIndex === -1) {
+      continue;
+    }
+
+    const parentSkillId = skill.id.slice(0, referenceIndex);
+    const parentSkill = parentSkills.get(parentSkillId);
+
+    if (!parentSkill) {
+      standaloneSkills.push({ ...skill });
+      continue;
+    }
+
+    parentSkill.references = [...(parentSkill.references ?? []), skill];
+  }
+
+  return [...Array.from(parentSkills.values()), ...standaloneSkills];
+}
 
 interface CommandPackageMetaSheetProps {
   activeMeta: { name: string; path: string; meta: PackageMeta } | null;
@@ -19,6 +56,9 @@ export function CommandPackageMetaSheet({ activeMeta, onClose, onOpenFile }: Com
     // 触发文件预览（保持命令包详情抽屉打开，以便用户查看完文件后可以返回）
     onOpenFile?.(filePath);
   };
+
+  const displaySkills = activeMeta?.meta.skills ? groupSkills(activeMeta.meta.skills) : [];
+
   return (
     <Sheet open={Boolean(activeMeta)} onOpenChange={isOpen => !isOpen && onClose()}>
       <SheetContent side="right" className="w-full p-0 sm:max-w-xl">
@@ -96,11 +136,11 @@ export function CommandPackageMetaSheet({ activeMeta, onClose, onOpenFile }: Com
                   </div>
                 </div>
               ) : null}
-              {activeMeta.meta.skills && activeMeta.meta.skills.length > 0 ? (
+              {displaySkills.length > 0 ? (
                 <div className="space-y-3">
                   <div className="text-base font-semibold">Skills</div>
                   <div className="space-y-2">
-                    {activeMeta.meta.skills.map(skill => (
+                    {displaySkills.map(skill => (
                       <div key={skill.id} className="rounded-lg border bg-muted/20 p-3 text-xs transition-colors">
                         <div
                           className="cursor-pointer transition-colors hover:text-primary"
@@ -122,6 +162,38 @@ export function CommandPackageMetaSheet({ activeMeta, onClose, onOpenFile }: Com
                             {skill.output ? <div>输出：{skill.output}</div> : null}
                           </div>
                         </div>
+                        {skill.references && skill.references.length > 0 ? (
+                          <div className="mt-3 space-y-2 border-t pt-3">
+                            <div className="text-xs font-medium text-muted-foreground">References</div>
+                            {skill.references.map(reference => (
+                              <div
+                                key={reference.id}
+                                className="cursor-pointer rounded border bg-muted/10 p-2 transition-colors hover:bg-muted/20 hover:border-primary/30"
+                                onClick={e => {
+                                  e.stopPropagation();
+                                  handleFileClick(reference.file);
+                                }}
+                                role="button"
+                                tabIndex={0}
+                                onKeyDown={e => {
+                                  if (e.key === 'Enter' || e.key === ' ') {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    handleFileClick(reference.file);
+                                  }
+                                }}>
+                                <div className="text-xs font-medium">{reference.id}</div>
+                                {reference.description ? (
+                                  <div className="mt-1 text-[11px] text-muted-foreground">{reference.description}</div>
+                                ) : null}
+                                <div className="mt-1 grid gap-1 text-[11px] text-muted-foreground">
+                                  <div>文件：{reference.file}</div>
+                                  {reference.output ? <div>输出：{reference.output}</div> : null}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        ) : null}
                         {skill.scripts && skill.scripts.length > 0 ? (
                           <div className="mt-3 space-y-2 border-t pt-3">
                             <div className="text-xs font-medium text-muted-foreground">脚本</div>

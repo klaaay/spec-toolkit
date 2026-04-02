@@ -1,0 +1,64 @@
+{
+  "package": "automation",
+  "version": "1.0.0",
+  "category": "自动化",
+  "commands": [],
+  "agents": [
+    {
+      "id": "pinchtab-openai",
+      "file": "skills/pinchtab/agents/openai.yaml",
+      "output": "pinchtab/openai.yaml",
+      "description": "OpenAI 连接器展示名、简介与默认提示词（中文）。"
+    }
+  ],
+  "skills": [
+    {
+      "id": "pinchtab",
+      "file": "skills/pinchtab/SKILL.md",
+      "output": "pinchtab/SKILL.md",
+      "description": "通过 PinchTab 做浏览器自动化：打开站点、查看可交互元素、走完整流程、填表、抓取正文、用持久化配置登录、导出截图或 PDF、管理多实例；CLI 不可用时回退 HTTP API。适合用稳定无障碍引用（如 e5、e12）驱动、省 token 的浏览器任务。"
+    },
+    {
+      "id": "pinchtab.TRUST",
+      "file": "skills/pinchtab/TRUST.md",
+      "output": "pinchtab/TRUST.md",
+      "description": "PinchTab 安全与信任说明：本地运行、无遥测、构建校验与已知误报等。"
+    },
+    {
+      "id": "pinchtab.references.api",
+      "file": "skills/pinchtab/references/api.md",
+      "output": "pinchtab/references/api.md",
+      "description": "PinchTab HTTP API 参考（导航、快照、操作、标签页、PDF 等）。"
+    },
+    {
+      "id": "pinchtab.references.agent-optimization",
+      "file": "skills/pinchtab/references/agent-optimization.md",
+      "output": "pinchtab/references/agent-optimization.md",
+      "description": "Agent 侧省 token、快照 diff、轻量引擎与常见故障恢复建议。"
+    },
+    {
+      "id": "pinchtab.references.profiles",
+      "file": "skills/pinchtab/references/profiles.md",
+      "output": "pinchtab/references/profiles.md",
+      "description": "通过 Dashboard API 管理浏览器用户档案与典型自动化流程。"
+    },
+    {
+      "id": "pinchtab.references.commands",
+      "file": "skills/pinchtab/references/commands.md",
+      "output": "pinchtab/references/commands.md",
+      "description": "PinchTab 0.8.x CLI 子命令与常见踩坑对照。"
+    },
+    {
+      "id": "pinchtab.references.env",
+      "file": "skills/pinchtab/references/env.md",
+      "output": "pinchtab/references/env.md",
+      "description": "与 Agent 相关的环境变量与推荐默认。"
+    },
+    {
+      "id": "pinchtab.references.mcp",
+      "file": "skills/pinchtab/references/mcp.md",
+      "output": "pinchtab/references/mcp.md",
+      "description": "PinchTab MCP 服务器配置、工具列表与限制说明。"
+    }
+  ]
+}

@@ -1,138 +1,72 @@
 # Superpowers 工作流
 
-基于 [superpowers](https://github.com/obra/superpowers)提炼出了核心的主 commands、skill 和 agent。
+当前命令包基于 [obra/superpowers](https://github.com/obra/superpowers) `v5.0.6` 同步，并按本仓库的 commands package 结构做了适配：
 
-本文档说明 `superpowers` 命令包的命令、skills、agents 及其调用关系。
+- 不再提供 command 模板，只提供 skill / agent 资源。
+- skill 名称、目录与输出路径统一保留 `superpowers-` 前缀，适配当前 CLI 安装结构。
+- 保留本地中文写作 skill `superpowers-writing-clearly-and-concisely`，不引入 upstream `writing-skills`。
 
-## 概述
+## 组件概览
 
-`superpowers` 提供一组通用工作流组件：
-- 命令：brainstorm / write-plan / execute-plan，覆盖从脑暴到计划执行的链路。
-- skills：支撑执行的能力模块（brainstorming、writing-plans、executing-plans、receiving/requesting-code-review、subagent-driven-development、finishing-a-development-branch、test-driven-development、writing-clearly-and-concisely）及其相关模板文件。
-- agents：code-reviewer，用于代码审查。
+`superpowers` 提供一组面向设计、计划、实现、调试、审查和收尾的工作流 skill：
 
-## 调用关系图
+- 总入口：`superpowers-using-superpowers`
+- 设计阶段：`superpowers-brainstorming`
+- 隔离工作区：`superpowers-using-git-worktrees`
+- 计划阶段：`superpowers-writing-plans`
+- 实施阶段：`superpowers-subagent-driven-development`、`superpowers-executing-plans`
+- 审查阶段：`superpowers-requesting-code-review`、`superpowers-receiving-code-review`、`superpowers-code-reviewer`
+- 质量与验证：`superpowers-test-driven-development`、`superpowers-verification-before-completion`
+- 调试与并行：`superpowers-systematic-debugging`、`superpowers-dispatching-parallel-agents`
+- 收尾：`superpowers-finishing-a-development-branch`
+- 中文写作：`superpowers-writing-clearly-and-concisely`
 
-```mermaid
-flowchart TD
-    subgraph Commands
-      C1[superpowers.brainstorm]
-      C2[superpowers.write-plan]
-      C3[superpowers.execute-plan]
-    end
-
-    subgraph Skills
-      S1[brainstorming]
-      S2[writing-plans]
-      S3[executing-plans]
-      S4[requesting-code-review]
-      S5[receiving-code-review]
-      S6[subagent-driven-development]
-      S7[finishing-a-development-branch]
-      S8[test-driven-development]
-      S9[writing-clearly-and-concisely]
-    end
-
-    subgraph Agents
-      A1[code-reviewer]
-    end
-
-    C1 -->|使用 skill| S1
-    C1 -->|输出设计/思路| C2
-    C2 -->|使用 skill| S2
-    C2 -->|产出计划| C3
-    C3 -->|使用 skill| S3
-    S3 -->|评审模板| S4
-    S4 -->|调用 agent| A1
-    S4 -->|处理反馈| S5
-    S3 -->|可选并行| S6
-    S3 -->|收尾| S7
-    S2 & S3 -->|写作/表达| S9
-    S3 & S6 -->|实施前后| S8
-```
-
-### 命令流程图
-
-```mermaid
-flowchart LR
-    C1[superpowers.brainstorm<br/>脑暴收敛] --> C2[superpowers.write-plan<br/>生成计划]
-    C2 --> C3[superpowers.execute-plan<br/>分批执行]
-
-    style C1 fill:#e1f5ff
-    style C2 fill:#e8f5e9
-    style C3 fill:#f3e5f5
-```
-
-### Skills 触发关系
+## 主流程
 
 ```mermaid
 flowchart TD
-    S1[brainstorming] --> S2[writing-plans]
-    S2 --> S3[executing-plans]
-    S3 --> S4[requesting-code-review]
-    S4 --> S5[receiving-code-review]
-    S3 --> S6[subagent-driven-development]
-    S3 --> S7[finishing-a-development-branch]
-    S3 --> S8[test-driven-development]
-    S2 --> S9[writing-clearly-and-concisely]
-    S3 --> S9
-
-    classDef main fill:#e8f5e9,stroke:#999;
-    class S1,S2,S3,S4,S5,S6,S7,S8,S9 main;
+    A[superpowers-using-superpowers] --> B[superpowers-brainstorming]
+    B --> C[superpowers-using-git-worktrees]
+    C --> D[superpowers-writing-plans]
+    D --> E{实施方式}
+    E -->|推荐| F[superpowers-subagent-driven-development]
+    E -->|兜底| G[superpowers-executing-plans]
+    F --> H[superpowers-requesting-code-review]
+    H --> I[superpowers-code-reviewer]
+    I --> J[superpowers-receiving-code-review]
+    F --> K[superpowers-finishing-a-development-branch]
+    G --> K
+    F --> L[superpowers-test-driven-development]
+    G --> L
+    F --> M[superpowers-verification-before-completion]
+    G --> M
 ```
 
-### 评审 Agent 链路
+## 关键配套文件
 
-```mermaid
-flowchart LR
-    R1[requesting-code-review] -->|派发模板<br/>code-reviewer.md| A1[code-reviewer agent]
-    A1 -->|返回审查结论| R2[receiving-code-review]
-```
+### Brainstorming
+- `superpowers-brainstorming/spec-document-reviewer-prompt.md`：设计规范审查模板。
+- `superpowers-brainstorming/visual-companion.md`：视觉脑暴浏览器伴侣指南。
+- `superpowers-brainstorming/scripts/*`：视觉脑暴的本地服务脚本与页面模板。
 
-### Subagent 驱动开发链路
+### Writing Plans
+- `superpowers-writing-plans/plan-document-reviewer-prompt.md`：实施计划文档审查模板。
 
-```mermaid
-flowchart TD
-    S6[subagent-driven-development] -->|分派实现者| T1[implementer-prompt]
-    T1 -->|实现完成| T2[spec-reviewer-prompt]
-    T2 -->|规范合规通过| T3[code-quality-reviewer-prompt]
-    T3 -->|调用| A1[code-reviewer agent]
-    A1 -->|质量审查通过| S6
-```
+### Subagent-Driven Development
+- `superpowers-subagent-driven-development/implementer-prompt.md`
+- `superpowers-subagent-driven-development/spec-reviewer-prompt.md`
+- `superpowers-subagent-driven-development/code-quality-reviewer-prompt.md`
 
-## 命令速览
-
-| 命令                       | 作用                                               | 主要产出                             |
-| -------------------------- | -------------------------------------------------- | ------------------------------------ |
-| `superpowers.brainstorm`   | 按脑暴 skill 结构化提问，收敛方案。                | 对话中的设计方向与摘要               |
-| `superpowers.write-plan`   | 基于确定的思路生成可执行计划（路径、步骤、命令）。 | `docs/plans/YYYY-MM-DD-<feature>.md` |
-| `superpowers.execute-plan` | 读取计划，分批执行并校验 checkpoint。              | 执行进度与校验输出                   |
-
-## Skills 速览（核心职责）
-
-### 核心 Skills
-- `brainstorming`：结构化脑暴、提问、收敛方案。
-- `writing-plans`：生成颗粒化实施计划（精确路径、示例、验证步骤）。
-- `executing-plans`：分批执行计划并在批次间汇报。
-- `requesting-code-review` + `code-reviewer` agent + `receiving-code-review`：发起与接收代码评审。
-- `subagent-driven-development`：同会话内任务级并行执行（每任务新 subagent，任务间 code review）。
-- `finishing-a-development-branch`：收尾开发分支，提供合并/PR/保留/丢弃选项并清理。
-- `test-driven-development`：先失败测试再实现，若项目无测试则声明跳过。
-- `writing-clearly-and-concisely`：中文写作清晰简练，主动、具体、删繁。
-
-### 模板文件（Templates）
-- `requesting-code-review/code-reviewer.md`：code-reviewer subagent 请求评审时使用的模板。
-- `subagent-driven-development/implementer-prompt.md`：实现者子代理提示模板，用于分派实现者子代理。
-- `subagent-driven-development/spec-reviewer-prompt.md`：规范合规性审查者提示模板，用于分派规范合规性审查者子代理。
-- `subagent-driven-development/code-quality-reviewer-prompt.md`：代码质量审查者提示模板，用于分派代码质量审查者子代理。
-- `test-driven-development/testing-anti-patterns.md`：测试反模式参考文档，帮助避免常见的测试错误。
+### Systematic Debugging
+- `superpowers-systematic-debugging/*.md`：根因追踪、条件等待、分层防御、压力案例等参考资料。
+- `superpowers-systematic-debugging/condition-based-waiting-example.ts`
+- `superpowers-systematic-debugging/find-polluter.sh`
 
 ## 使用建议
 
-1) 先用 `superpowers.brainstorm` 收敛方案；必要时结合 `brainstorming` skill。  
-2) 运行 `superpowers.write-plan` 生成计划，依据 `writing-plans` / `writing-clearly-and-concisely` 优化表述。  
-3) 用 `superpowers.execute-plan` 按批次执行，执行过程中：  
-   - 按需触发 `requesting-code-review` + `code-reviewer` + `receiving-code-review`（使用 `code-reviewer.md` 模板）。  
-   - 需要并行/同会话执行时用 `subagent-driven-development`（使用 `implementer-prompt.md`、`spec-reviewer-prompt.md`、`code-quality-reviewer-prompt.md` 模板）。  
-   - 收尾前调用 `finishing-a-development-branch`。  
-   - 确保按 `test-driven-development` 原则执行（参考 `testing-anti-patterns.md` 避免常见错误；如缺少测试框架，先声明无法执行 TDD）。
+1. 会话开始时优先用 `superpowers-using-superpowers` 判断该走哪条流程。
+2. 有任何创造性工作，先走 `superpowers-brainstorming`，得到已确认的 spec 后，若要进入实现，优先先用 `superpowers-using-git-worktrees` 准备隔离工作区，再进入 `superpowers-writing-plans`。
+3. 有子代理能力时，默认优先 `superpowers-subagent-driven-development`；没有时再退回 `superpowers-executing-plans`。
+4. 代码评审通过 `superpowers-requesting-code-review` + `superpowers-code-reviewer` + `superpowers-receiving-code-review` 闭环处理。
+5. 遇到复杂问题时优先启用 `superpowers-systematic-debugging`；面对多个独立问题时用 `superpowers-dispatching-parallel-agents`。
+6. 宣称完成前，用 `superpowers-verification-before-completion` 先做新鲜验证；整个开发完成后再进入 `superpowers-finishing-a-development-branch`。
