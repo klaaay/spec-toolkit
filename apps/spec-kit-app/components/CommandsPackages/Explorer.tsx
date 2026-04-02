@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { ChevronRightIcon, FileTextIcon, FolderIcon, InfoIcon } from 'lucide-react';
+import { ChevronRightIcon, EllipsisVertical, FileTextIcon, FolderIcon } from 'lucide-react';
 
 import { type DirectoryNode, type FileNode, type PackageMeta, type PackageTree } from '@/lib/commands-packages';
 import { Button } from '@/components/ui/button';
@@ -324,7 +324,7 @@ export function CommandsPackagesExplorer({ root }: ExplorerProps) {
               </div>
               <div className="space-y-1">
                 <div className="text-sm font-semibold leading-5 break-all">{item.name}</div>
-                {canShowMeta && <div className="text-xs text-muted-foreground">使用右上角图标查看命令包信息</div>}
+                {canShowMeta && <div className="text-xs text-muted-foreground">使用右上角菜单查看详情和操作</div>}
                 {isFile && <div className="text-xs uppercase text-muted-foreground">{item.extension}</div>}
               </div>
             </div>
@@ -347,7 +347,7 @@ export function CommandsPackagesExplorer({ root }: ExplorerProps) {
                   }}
                   onFocus={() => openMenu(item.path)}
                   onBlur={() => scheduleMenuClose(item.path)}>
-                  <InfoIcon className="h-4 w-4" />
+                  <EllipsisVertical className="h-4 w-4" />
                 </button>
                 <div
                   className={cn(
@@ -430,11 +430,11 @@ export function CommandsPackagesExplorer({ root }: ExplorerProps) {
               <AddCommandPackageGuide show={currentPath.length === 0} />
             </div>
             <p className="text-sm text-muted-foreground mb-4">
-              双击进入下级目录或打开文件，点击卡片右上角的图标即可查看命令包详情。
+              双击进入下级目录或打开文件，点击卡片右上角的菜单即可查看详情和操作。
             </p>
             {categorizedItems ? (
               <div className="space-y-6">
-                {categorizedItems.orderedCategories.map((category, index) => {
+                {categorizedItems.orderedCategories.map(category => {
                   const groupItems = categorizedItems.grouped.get(category) ?? [];
                   return (
                     <div key={category} className="space-y-3">
