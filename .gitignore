@@ -103,3 +103,4 @@ docker-local*
 /.cursor
 /.codex
 /.claude
+/.worktrees
