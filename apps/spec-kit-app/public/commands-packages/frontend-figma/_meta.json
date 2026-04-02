@@ -1,0 +1,39 @@
+{
+  "package": "frontend-figma",
+  "version": "1.0.0",
+  "category": "前端开发",
+  "commands": [],
+  "skills": [
+    {
+      "id": "frontend-figma-bootstrap",
+      "file": "skills/frontend-figma-bootstrap/SKILL.md",
+      "output": "frontend-figma-bootstrap/SKILL.md",
+      "description": "扫描仓库并补齐必要追问，建立 Figma 落地约束 `.specify/memory/fe-figma-gen.md`。"
+    },
+    {
+      "id": "frontend-figma-implementation",
+      "file": "skills/frontend-figma-implementation/SKILL.md",
+      "output": "frontend-figma-implementation/SKILL.md",
+      "description": "结合 Figma 设计稿、前端宪法和项目约束，实施页面或组件的设计落地。"
+    },
+    {
+      "id": "frontend-figma-toolkit-cli",
+      "file": "skills/frontend-figma-toolkit-cli/SKILL.md",
+      "output": "frontend-figma-toolkit-cli/SKILL.md",
+      "description": "使用 figma-toolkit CLI 获取 Figma 文件、节点和图片资源，适合跨项目的素材准备和资源落盘。"
+    }
+  ],
+  "mcpServers": {
+    "figma": {
+      "name": "Figma MCP",
+      "description": "Figma 官方 MCP，用于获取设计上下文、变量、截图和代码参考。",
+      "docUrl": "https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Figma-MCP-server"
+    }
+  },
+  "otherDependencies": {
+    "figma-toolkit-cli": {
+      "name": "Figma Toolkit CLI",
+      "description": "直接调用 Figma REST API 的命令行工具，适合批量下载资源和脱离 MCP 的素材准备工作。"
+    }
+  }
+}

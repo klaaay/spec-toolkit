@@ -1,0 +1,20 @@
+{
+  "package": "frontend-mocking",
+  "version": "1.0.0",
+  "category": "前端开发",
+  "commands": [],
+  "skills": [
+    {
+      "id": "frontend-whistle-mock",
+      "file": "skills/frontend-whistle-mock/SKILL.md",
+      "output": "frontend-whistle-mock/SKILL.md",
+      "description": "通过 Whistle 规则和响应数据快速建立接口 Mock，适合本地前端联调和版本化管理。"
+    }
+  ],
+  "mcpServers": {
+    "whistle-mcp": {
+      "name": "Whistle MCP",
+      "description": "用于创建、更新、启用和检查 Whistle 规则与 values，支持本地代理 Mock 工作流。"
+    }
+  }
+}

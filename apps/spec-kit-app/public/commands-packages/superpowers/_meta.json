@@ -1,30 +1,8 @@
 {
   "package": "superpowers",
-  "version": "1.0.0",
+  "version": "5.0.6",
   "category": "SDD-Spec开发",
-  "commands": [
-    {
-      "id": "superpowers-brainstorm",
-      "file": "commands/superpowers-brainstorm.liquid.md",
-      "output": ".specify/templates/commands/superpowers-brainstorm.md",
-      "description": "通过苏格拉底式提问进行交互式设计打磨",
-      "requires": []
-    },
-    {
-      "id": "superpowers-write-plan",
-      "file": "commands/superpowers-write-plan.liquid.md",
-      "output": ".specify/templates/commands/superpowers-write-plan.md",
-      "description": "以颗粒化任务编写详细实施计划",
-      "requires": []
-    },
-    {
-      "id": "superpowers-execute-plan",
-      "file": "commands/superpowers-execute-plan.liquid.md",
-      "output": ".specify/templates/commands/superpowers-execute-plan.md",
-      "description": "分批执行计划并在检查点复审",
-      "requires": []
-    }
-  ],
+  "commands": [],
   "agents": [
     {
       "id": "superpowers-code-reviewer",
@@ -34,6 +12,24 @@
     }
   ],
   "skills": [
+    {
+      "id": "superpowers-using-superpowers",
+      "file": "skills/superpowers-using-superpowers/SKILL.md",
+      "output": "superpowers-using-superpowers/SKILL.md",
+      "description": "会话起始时使用：建立如何发现、判断并调用 superpowers skills 的总入口规则。"
+    },
+    {
+      "id": "superpowers-using-superpowers.references.codex-tools",
+      "file": "skills/superpowers-using-superpowers/references/codex-tools.md",
+      "output": "superpowers-using-superpowers/references/codex-tools.md",
+      "description": "Superpowers 在 Codex 环境中的工具映射与使用约定。"
+    },
+    {
+      "id": "superpowers-using-superpowers.references.gemini-tools",
+      "file": "skills/superpowers-using-superpowers/references/gemini-tools.md",
+      "output": "superpowers-using-superpowers/references/gemini-tools.md",
+      "description": "Superpowers 在 Gemini CLI 环境中的工具映射与使用约定。"
+    },
     {
       "id": "superpowers-receiving-code-review",
       "file": "skills/superpowers-receiving-code-review/SKILL.md",
@@ -56,7 +52,46 @@
       "id": "superpowers-brainstorming",
       "file": "skills/superpowers-brainstorming/SKILL.md",
       "output": "superpowers-brainstorming/SKILL.md",
-      "description": "实施前的协作式提问与设计打磨流程。"
+      "description": "在任何创造性工作前使用：探索需求、提出方案、产出并审阅设计规范。",
+      "scripts": [
+        {
+          "id": "frame-template",
+          "file": "skills/superpowers-brainstorming/scripts/frame-template.html",
+          "description": "视觉脑暴浏览器伴侣的页面框架模板。"
+        },
+        {
+          "id": "helper",
+          "file": "skills/superpowers-brainstorming/scripts/helper.js",
+          "description": "视觉脑暴浏览器伴侣的前端交互辅助脚本。"
+        },
+        {
+          "id": "server",
+          "file": "skills/superpowers-brainstorming/scripts/server.cjs",
+          "description": "视觉脑暴浏览器伴侣的本地服务端。"
+        },
+        {
+          "id": "start-server",
+          "file": "skills/superpowers-brainstorming/scripts/start-server.sh",
+          "description": "启动视觉脑暴浏览器伴侣服务。"
+        },
+        {
+          "id": "stop-server",
+          "file": "skills/superpowers-brainstorming/scripts/stop-server.sh",
+          "description": "停止视觉脑暴浏览器伴侣服务。"
+        }
+      ]
+    },
+    {
+      "id": "superpowers-brainstorming.spec-document-reviewer-prompt",
+      "file": "skills/superpowers-brainstorming/spec-document-reviewer-prompt.md",
+      "output": "superpowers-brainstorming/spec-document-reviewer-prompt.md",
+      "description": "设计文档审查子代理提示模板。"
+    },
+    {
+      "id": "superpowers-brainstorming.visual-companion",
+      "file": "skills/superpowers-brainstorming/visual-companion.md",
+      "output": "superpowers-brainstorming/visual-companion.md",
+      "description": "视觉脑暴浏览器伴侣使用指南。"
     },
     {
       "id": "superpowers-executing-plans",
@@ -69,6 +104,18 @@
       "file": "skills/superpowers-writing-plans/SKILL.md",
       "output": "superpowers-writing-plans/SKILL.md",
       "description": "生成包含精确路径、示例与验证步骤的详细实施计划。"
+    },
+    {
+      "id": "superpowers-writing-plans.plan-document-reviewer-prompt",
+      "file": "skills/superpowers-writing-plans/plan-document-reviewer-prompt.md",
+      "output": "superpowers-writing-plans/plan-document-reviewer-prompt.md",
+      "description": "实施计划文档审查子代理提示模板。"
+    },
+    {
+      "id": "superpowers-using-git-worktrees",
+      "file": "skills/superpowers-using-git-worktrees/SKILL.md",
+      "output": "superpowers-using-git-worktrees/SKILL.md",
+      "description": "在开始功能实现或执行实施计划前，创建并验证隔离的 git worktree 工作区，并同步原目录的 .env.local。"
     },
     {
       "id": "superpowers-finishing-a-development-branch",
@@ -105,6 +152,84 @@
       "file": "skills/superpowers-writing-clearly-and-concisely/SKILL.md",
       "output": "superpowers-writing-clearly-and-concisely/SKILL.md",
       "description": "应用简明中文写作原则，让文本更清晰紧凑。"
+    },
+    {
+      "id": "superpowers-dispatching-parallel-agents",
+      "file": "skills/superpowers-dispatching-parallel-agents/SKILL.md",
+      "output": "superpowers-dispatching-parallel-agents/SKILL.md",
+      "description": "面对多个彼此独立的问题时，按问题域并行派发多个子代理。"
+    },
+    {
+      "id": "superpowers-systematic-debugging",
+      "file": "skills/superpowers-systematic-debugging/SKILL.md",
+      "output": "superpowers-systematic-debugging/SKILL.md",
+      "description": "系统化调试流程：防猜测、控变量、做最小复现并逐步逼近根因。",
+      "scripts": [
+        {
+          "id": "condition-based-waiting-example",
+          "file": "skills/superpowers-systematic-debugging/condition-based-waiting-example.ts",
+          "description": "条件式等待示例代码。"
+        },
+        {
+          "id": "find-polluter",
+          "file": "skills/superpowers-systematic-debugging/find-polluter.sh",
+          "description": "定位测试污染源的辅助脚本。"
+        }
+      ]
+    },
+    {
+      "id": "superpowers-systematic-debugging.creation-log",
+      "file": "skills/superpowers-systematic-debugging/CREATION-LOG.md",
+      "output": "superpowers-systematic-debugging/CREATION-LOG.md",
+      "description": "systematic-debugging 技能的创建记录。"
+    },
+    {
+      "id": "superpowers-systematic-debugging.condition-based-waiting",
+      "file": "skills/superpowers-systematic-debugging/condition-based-waiting.md",
+      "output": "superpowers-systematic-debugging/condition-based-waiting.md",
+      "description": "条件式等待说明与实践建议。"
+    },
+    {
+      "id": "superpowers-systematic-debugging.defense-in-depth",
+      "file": "skills/superpowers-systematic-debugging/defense-in-depth.md",
+      "output": "superpowers-systematic-debugging/defense-in-depth.md",
+      "description": "分层防御式调试与验证策略。"
+    },
+    {
+      "id": "superpowers-systematic-debugging.root-cause-tracing",
+      "file": "skills/superpowers-systematic-debugging/root-cause-tracing.md",
+      "output": "superpowers-systematic-debugging/root-cause-tracing.md",
+      "description": "根因追踪方法与记录方式。"
+    },
+    {
+      "id": "superpowers-systematic-debugging.test-academic",
+      "file": "skills/superpowers-systematic-debugging/test-academic.md",
+      "output": "superpowers-systematic-debugging/test-academic.md",
+      "description": "避免走向学术化过度分析的调试提醒。"
+    },
+    {
+      "id": "superpowers-systematic-debugging.test-pressure-1",
+      "file": "skills/superpowers-systematic-debugging/test-pressure-1.md",
+      "output": "superpowers-systematic-debugging/test-pressure-1.md",
+      "description": "调试压力测试案例 1。"
+    },
+    {
+      "id": "superpowers-systematic-debugging.test-pressure-2",
+      "file": "skills/superpowers-systematic-debugging/test-pressure-2.md",
+      "output": "superpowers-systematic-debugging/test-pressure-2.md",
+      "description": "调试压力测试案例 2。"
+    },
+    {
+      "id": "superpowers-systematic-debugging.test-pressure-3",
+      "file": "skills/superpowers-systematic-debugging/test-pressure-3.md",
+      "output": "superpowers-systematic-debugging/test-pressure-3.md",
+      "description": "调试压力测试案例 3。"
+    },
+    {
+      "id": "superpowers-verification-before-completion",
+      "file": "skills/superpowers-verification-before-completion/SKILL.md",
+      "output": "superpowers-verification-before-completion/SKILL.md",
+      "description": "在宣称完成、修复、通过测试前先做新鲜验证，避免无证据结论。"
     },
     {
       "id": "superpowers-test-driven-development",
