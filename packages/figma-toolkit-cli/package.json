@@ -1,0 +1,42 @@
+{
+  "name": "@klaaay/figma-toolkit-cli",
+  "version": "0.1.0",
+  "description": "Figma Toolkit CLI",
+  "type": "module",
+  "module": "dist/index.js",
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "start": "node dist/index.js",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "bin": {
+    "figma-toolkit": "./dist/index.js"
+  },
+  "keywords": [
+    "cli",
+    "figma",
+    "toolkit"
+  ],
+  "files": [
+    "dist/**/*",
+    "dist/**/.*",
+    "!dist/**/*.map"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "wuzhen",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.8.4",
+    "commander": "^13.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.2.0",
+    "tsup": "^8.4.0",
+    "typescript": "^5.8.2",
+    "vitest": "^3.2.1"
+  }
+}
