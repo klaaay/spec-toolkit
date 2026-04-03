@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: PluginDependenciesDetailPageP
   }
 
   return {
-    title: `${plugin.name} - 辅助插件`,
+    title: `${plugin.name} - 插件依赖`,
     description: plugin.summary,
   };
 }

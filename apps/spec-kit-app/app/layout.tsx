@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button';
 
 export const metadata: Metadata = {
   title: 'Spec ToolKit 文档',
-  description: 'Spec ToolKit 的使用指南和 API 文档',
+  description: 'Spec ToolKit 的 CLI、命令包内容与辅助依赖说明',
 };
 
 export default function RootLayout({
@@ -34,7 +34,7 @@ export default function RootLayout({
                     rel="noopener noreferrer"
                     className="flex items-center gap-2">
                     <GitBranch className="h-4 w-4" />
-                    <span>Github 仓库</span>
+                    <span>GitHub 仓库</span>
                   </a>
                 </Button>
                 <Button variant="ghost" size="sm" asChild>

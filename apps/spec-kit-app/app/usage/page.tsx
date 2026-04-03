@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { CodeBlock } from '@/components/ui/code-block';
 
 const aiAssistants = [
@@ -15,190 +16,327 @@ const aiAssistants = [
   { key: 'roo', name: 'Roo Code', requiresCli: false },
   { key: 'codebuddy', name: 'CodeBuddy', requiresCli: true },
   { key: 'q', name: 'Amazon Q Developer CLI', requiresCli: true },
-];
+] as const;
 
-const scriptOptions = [
+const specTsCommands = [
   {
-    type: 'sh',
-    label: 'POSIX Shell (bash/zsh)',
-    defaultHint: 'macOS / Linux 默认',
+    name: 'init',
+    summary: '初始化项目模板，并按 AI 助手写入对应命令与目录结构。',
+    code: 'spec-ts init my-project --ai claude',
   },
-  { type: 'ps', label: 'PowerShell', defaultHint: 'Windows 默认' },
-];
+  {
+    name: 'check',
+    summary: '检查 Git、内置 AI 助手 CLI、VS Code 与 VS Code Insiders 是否可用。',
+    code: 'spec-ts check',
+  },
+  {
+    name: 'pull-package',
+    summary: '从命令包静态源拉取命令包内容，并写入当前项目模板目录。',
+    code: 'spec-ts pull-package superpowers --ai claude',
+  },
+] as const;
 
-const initOptions = [
+const figmaConfigCommands = [
   {
-    flag: '--ai <agent>',
-    description: '必选。指定要启用的 AI 助手，需与上方列表中的键名一致。',
+    name: 'set-token',
+    summary: '保存 Figma Token 到本地配置文件。',
+    code: 'figma-toolkit config set-token <your-figma-token>',
   },
   {
-    flag: '--script <type>',
-    description: '可选。脚本类型，支持 sh 或 ps。默认随系统选择（Unix 为 sh，Windows 为 ps）。',
+    name: 'set-base-url',
+    summary: '保存 Figma API 服务地址。',
+    code: 'figma-toolkit config set-base-url https://api.figma.com',
   },
   {
-    flag: '--ignore-agent-tools',
-    description: '跳过对 AI 助手 CLI 的安装检查。',
+    name: 'list',
+    summary: '查看当前配置，Token 会自动脱敏。',
+    code: 'figma-toolkit config list',
   },
-  { flag: '--no-git', description: '跳过 Git 仓库初始化。' },
   {
-    flag: '--here',
-    description: '在当前目录下初始化项目。配合 --force 可覆盖已有文件。',
+    name: 'path',
+    summary: '输出配置文件路径。',
+    code: 'figma-toolkit config path',
   },
-  { flag: '--force', description: '与 --here 搭配使用时跳过覆盖确认。' },
-];
+  {
+    name: 'remove',
+    summary: '删除某一项配置，支持 figmaToken、baseUrl。',
+    code: 'figma-toolkit config remove figmaToken',
+  },
+] as const;
 
-const pullPackageOptions = [
+const figmaApiCommands = [
   {
-    flag: '--registry <url>',
-    description: '命令包源地址，默认 https://spec-toolkit-spec-kit-app.vercel.app/commands-packages。',
-  },
-  { flag: '--ai <agent>', description: '必选。指定要同步命令的 AI 助手。' },
-  {
-    flag: '--script <type>',
-    description: '可选。脚本类型，默认为当前系统对应的类型。',
+    name: 'figma file',
+    summary: '读取文件信息，对应 Figma 官方 `GET /v1/files/{file_key}`。',
+    code: 'figma-toolkit figma file <fileKey>',
   },
   {
-    flag: '--project <path>',
-    description: 'Specify 项目根目录，默认当前工作目录。',
+    name: 'figma nodes',
+    summary: '读取节点信息，对应 `GET /v1/files/{file_key}/nodes`。',
+    code: 'figma-toolkit figma nodes "<figma-link-with-node-id>"',
   },
-  { flag: '--force', description: '允许覆盖本地已存在的模板与命令文件。' },
-];
+  {
+    name: 'figma images',
+    summary: '导出并下载图片资源到本地目录，对应 `GET /v1/images/{file_key}`。',
+    code: 'figma-toolkit figma images "<figma-link-with-node-id>" --format png --scale 2',
+  },
+  {
+    name: 'figma image-fills',
+    summary: '读取图片填充资源，对应 `GET /v1/files/{file_key}/images`。',
+    code: 'figma-toolkit figma image-fills <fileKey>',
+  },
+] as const;
 
 export const metadata = {
   title: '使用说明 - Spec ToolKit 文档',
-  description: 'Spec ToolKit 工具的使用说明和命令指南',
+  description: 'Spec ToolKit 当前 packages 中所有 CLI 的安装方式与命令说明',
 };
 
 export default function UsagePage() {
   return (
     <div className="space-y-8">
-      <header>
-        <h1 className="text-3xl font-bold mb-2">Specify CLI 使用指南</h1>
+      <header className="space-y-3">
+        <h1 className="text-3xl font-bold">CLI 使用说明</h1>
         <p className="text-gray-600">
-          Specify CLI（命令名为 <code>spec-ts</code>
-          ）提供项目初始化、工具检测与命令包同步能力。下文内容依据 CLI 参数与默认行为整理，便于快速上手并避免常见误用。
+          本页汇总当前 <code>packages</code> 中所有对外 CLI 的安装方式、主要命令与使用示例。目前包含{' '}
+          <code>spec-ts</code> 与 <code>figma-toolkit</code> 两个命令。
         </p>
       </header>
 
-      <section className="p-6 bg-white rounded-lg shadow-sm border space-y-4">
-        <h2 className="text-2xl font-semibold">安装</h2>
-        <div>
-          <h3 className="text-xl font-medium mb-2">Node 环境配置</h3>
-          <p className="mb-2">推荐使用 Node.js LTS 版本，并搭配 pnpm 或 npm 进行依赖管理。</p>
-          <a
-            href="https://nodejs.org/zh-cn/download/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 hover:underline">
-            Node.js 官方下载
-          </a>
+      <section className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div className="rounded-lg border bg-white p-6 shadow-sm">
+          <div className="mb-2 text-xs font-medium uppercase tracking-wide text-slate-500">packages/spec-kit-ts</div>
+          <h2 className="mb-3 text-2xl font-semibold">spec-ts</h2>
+          <p className="mb-4 text-sm leading-6 text-gray-700">
+            用于初始化项目模板、检查环境，以及从文档站拉取命令包内容到本地项目目录。
+          </p>
+          <Link href="#spec-ts" className="text-sm font-medium text-blue-600 hover:underline">
+            查看 spec-ts 详细说明
+          </Link>
         </div>
-        <div>
-          <h3 className="text-xl font-medium mb-2">全局安装 CLI</h3>
-          <p className="mb-3">通过内部私有源安装 Specify CLI：</p>
-          <CodeBlock language="bash" code={`npm install -g @klaaay/spec-kit-ts`} />
+
+        <div className="rounded-lg border bg-white p-6 shadow-sm">
+          <div className="mb-2 text-xs font-medium uppercase tracking-wide text-slate-500">
+            packages/figma-toolkit-cli
+          </div>
+          <h2 className="mb-3 text-2xl font-semibold">figma-toolkit</h2>
+          <p className="mb-4 text-sm leading-6 text-gray-700">
+            用于管理本地 Figma 配置，并直接调用 Figma 官方 REST API 读取文件、节点和图片资源。
+          </p>
+          <Link href="#figma-toolkit" className="text-sm font-medium text-blue-600 hover:underline">
+            查看 figma-toolkit 详细说明
+          </Link>
         </div>
       </section>
 
-      <section className="p-6 bg-white rounded-lg shadow-sm border space-y-4">
-        <h2 className="text-2xl font-semibold">基础命令</h2>
-        <p>安装完成后可通过帮助命令快速查看所有子命令与参数说明。CLI 在未指定子命令时会自动输出帮助信息。</p>
-        <CodeBlock language="bash" code={`spec-ts --help\nspec-ts --version`} />
-      </section>
+      <section id="spec-ts" className="space-y-6 rounded-lg border bg-white p-6 shadow-sm scroll-mt-20">
+        <div className="space-y-2">
+          <h2 className="text-2xl font-semibold">spec-ts</h2>
+          <p className="text-gray-600">
+            <code>spec-ts</code> 是 `@klaaay/spec-kit-ts`
+            暴露的命令。它负责把项目模板、命令目录和命令包内容写入具体项目目录。
+          </p>
+        </div>
 
-      <section className="p-6 bg-white rounded-lg shadow-sm border space-y-4">
-        <h2 className="text-2xl font-semibold">支持的 AI 助手</h2>
-        <p>
-          以下键名用于 <code>--ai</code> 参数；带 * 的项目需要提前安装对应 CLI：
-        </p>
-        <ul className="list-disc list-inside space-y-1">
-          {aiAssistants.map(agent => (
-            <li key={agent.key}>
-              <span className="font-medium">{agent.key}</span> — {agent.name}
-              {agent.requiresCli ? ' *' : ''}
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="p-6 bg-white rounded-lg shadow-sm border space-y-4">
-        <h2 className="text-2xl font-semibold">脚本类型</h2>
-        <p>命令脚本支持 Shell 与 PowerShell，两者在指定自动化脚本时会生成不同的命令模板。</p>
-        <ul className="list-disc list-inside space-y-1">
-          {scriptOptions.map(option => (
-            <li key={option.type}>
-              <span className="font-medium">{option.type}</span> — {option.label}（{option.defaultHint}）
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="p-6 bg-white rounded-lg shadow-sm border space-y-4">
-        <h2 className="text-2xl font-semibold">项目初始化：init</h2>
-        <p>
-          <code>spec-ts init</code> 会根据选择的 AI 助手与脚本类型复制模板、配置脚本权限并初始化 Git 仓库。
-        </p>
         <div className="space-y-3">
-          <div>
-            <p className="font-medium">在新目录创建项目：</p>
-            <CodeBlock language="bash" code={`spec-ts init my-spec-project --ai claude --script sh`} />
-          </div>
-          <div>
-            <p className="font-medium">在当前项目目录下直接初始化：</p>
-            <p className="text-gray-600 text-sm mb-2">
-              使用 <code>.</code> 作为项目名可等效于 <code>--here</code>
-              ，会将模板合并到现有目录中，适用于已经存在的仓库。如目录非空，CLI 会提示覆盖风险，可结合{' '}
-              <code>--force</code> 跳过确认。
-            </p>
-            <CodeBlock language="bash" code={`spec-ts init . --ai claude --script sh`} />
-          </div>
+          <h3 className="text-xl font-medium">安装</h3>
+          <CodeBlock language="bash" code={`npm install -g @klaaay/spec-kit-ts`} />
+          <CodeBlock language="bash" code={`spec-ts --help\nspec-ts --version`} />
         </div>
-        <div>
-          <h3 className="text-xl font-medium mb-2">常用参数</h3>
-          <ul className="list-disc list-inside space-y-1">
-            {initOptions.map(item => (
-              <li key={item.flag}>
-                <span className="font-medium">{item.flag}</span> — {item.description}
-              </li>
+
+        <div className="space-y-3">
+          <h3 className="text-xl font-medium">主要命令</h3>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            {specTsCommands.map(command => (
+              <div key={command.name} className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+                <h4 className="mb-2 font-semibold text-slate-900">{command.name}</h4>
+                <p className="mb-3 text-sm text-gray-700">{command.summary}</p>
+                <CodeBlock language="bash" code={command.code} />
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
-        <p className="text-gray-600 text-sm">
-          初始化完成后 CLI 会提示后续步骤（如设置 CODEX_HOME 或使用斜杠命令），请按需执行。
-        </p>
+
+        <div className="space-y-3">
+          <h3 className="text-xl font-medium">支持的 AI 助手键名</h3>
+          <p className="text-sm text-gray-600">
+            以下键名可用于 <code>--ai</code> 参数。标记为“需要 CLI”的助手，需要先在本机安装对应命令行工具。
+          </p>
+          <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
+            {aiAssistants.map(agent => (
+              <div key={agent.key} className="rounded border border-slate-200 px-3 py-2 text-sm text-gray-700">
+                <span className="font-medium">{agent.key}</span>
+                <span className="mx-2 text-slate-400">-</span>
+                <span>{agent.name}</span>
+                <span className="ml-2 text-slate-500">{agent.requiresCli ? '需要 CLI' : '无需 CLI'}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="space-y-3">
+          <h3 className="text-xl font-medium">常用参数</h3>
+          <div className="space-y-4 text-sm text-gray-700">
+            <div>
+              <h4 className="mb-2 font-semibold">init</h4>
+              <ul className="list-disc space-y-1 pl-5">
+                <li>
+                  <code>--ai &lt;agent&gt;</code>：必填，指定要启用的 AI 助手键名。
+                </li>
+                <li>
+                  <code>--script &lt;type&gt;</code>：脚本类型，支持 <code>sh</code> 和 <code>ps</code>。
+                </li>
+                <li>
+                  <code>--ignore-agent-tools</code>：跳过对 AI 助手 CLI 的安装检查。
+                </li>
+                <li>
+                  <code>--no-git</code>：跳过 Git 仓库初始化。
+                </li>
+                <li>
+                  <code>--here</code>：在当前目录初始化，而不是创建新目录。
+                </li>
+                <li>
+                  <code>--force</code>：与 <code>--here</code> 配合时跳过覆盖确认。
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="mb-2 font-semibold">pull-package</h4>
+              <ul className="list-disc space-y-1 pl-5">
+                <li>
+                  <code>--registry &lt;url&gt;</code>：命令包源地址。
+                </li>
+                <li>
+                  <code>--ai &lt;agent&gt;</code>：必填，指定要写入模板的 AI 助手。
+                </li>
+                <li>
+                  <code>--script &lt;type&gt;</code>：脚本类型，支持 <code>sh</code> 和 <code>ps</code>。
+                </li>
+                <li>
+                  <code>--project &lt;path&gt;</code>：Specify 项目根目录，默认当前目录。
+                </li>
+                <li>
+                  <code>--force</code>：允许覆盖本地已存在的模板与命令文件。
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div className="space-y-3">
+          <h3 className="text-xl font-medium">推荐使用流程</h3>
+          <CodeBlock
+            language="bash"
+            code={`npm install -g @klaaay/spec-kit-ts
+spec-ts init my-project --ai claude
+cd my-project
+spec-ts check
+spec-ts pull-package superpowers --ai claude`}
+          />
+          <p className="text-sm text-gray-600">
+            命令包名称请以
+            <Link href="/commands-packages" className="mx-1 text-blue-600 hover:underline">
+              命令包广场
+            </Link>
+            中实际提供的命令包为准。
+          </p>
+        </div>
       </section>
 
-      <section className="p-6 bg-white rounded-lg shadow-sm border space-y-4">
-        <h2 className="text-2xl font-semibold">环境检查：check</h2>
-        <p>
-          <code>spec-ts check</code> 用于检查 Git、所有内置 AI 助手 CLI 以及 VS Code 是否安装，确保运行环境准备就绪。
-        </p>
-        <CodeBlock language="bash" code="spec-ts check" />
-        <p className="text-gray-600 text-sm">建议在首次安装 CLI 或更新工具链后执行，以便快速定位缺少的依赖。</p>
-      </section>
+      <section id="figma-toolkit" className="space-y-6 rounded-lg border bg-white p-6 shadow-sm scroll-mt-20">
+        <div className="space-y-2">
+          <h2 className="text-2xl font-semibold">figma-toolkit</h2>
+          <p className="text-gray-600">
+            <code>figma-toolkit</code> 是 `@klaaay/figma-toolkit-cli` 暴露的命令，负责保存本地配置并直接调用 Figma 官方
+            REST API。
+          </p>
+        </div>
 
-      <section className="p-6 bg-white rounded-lg shadow-sm border space-y-4">
-        <h2 className="text-2xl font-semibold">命令包同步：pull-package</h2>
-        <p>
-          <code>spec-ts pull-package</code> 会从命令包仓库拉取最新模板，并根据 AI
-          助手与脚本类型渲染斜杠命令。未指定包名时默认使用
-          <code>fe</code>。
-        </p>
-        <CodeBlock language="bash" code={`spec-ts pull-package fe --ai claude --script sh`} />
-        <div>
-          <h3 className="text-xl font-medium mb-2">常用参数</h3>
-          <ul className="list-disc list-inside space-y-1">
-            {pullPackageOptions.map(item => (
-              <li key={item.flag}>
-                <span className="font-medium">{item.flag}</span> — {item.description}
-              </li>
+        <div className="space-y-3">
+          <h3 className="text-xl font-medium">安装</h3>
+          <CodeBlock language="bash" code={`npm install -g @klaaay/figma-toolkit-cli`} />
+          <CodeBlock language="bash" code={`figma-toolkit --help\nfigma-toolkit --version`} />
+        </div>
+
+        <div className="space-y-3">
+          <h3 className="text-xl font-medium">配置命令</h3>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            {figmaConfigCommands.map(command => (
+              <div key={command.name} className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+                <h4 className="mb-2 font-semibold text-slate-900">{command.name}</h4>
+                <p className="mb-3 text-sm text-gray-700">{command.summary}</p>
+                <CodeBlock language="bash" code={command.code} />
+              </div>
             ))}
+          </div>
+          <p className="text-sm text-gray-600">
+            默认配置文件路径为 <code>~/.figma-toolkit-cli/config.json</code>。
+          </p>
+        </div>
+
+        <div className="space-y-3">
+          <h3 className="text-xl font-medium">Figma API 命令</h3>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            {figmaApiCommands.map(command => (
+              <div key={command.name} className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+                <h4 className="mb-2 font-semibold text-slate-900">{command.name}</h4>
+                <p className="mb-3 text-sm text-gray-700">{command.summary}</p>
+                <CodeBlock language="bash" code={command.code} />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="space-y-3">
+          <h3 className="text-xl font-medium">输入规则</h3>
+          <ul className="list-disc space-y-1 pl-5 text-sm text-gray-700">
+            <li>
+              所有 Figma 子命令都支持直接传入 <code>fileKey</code>。
+            </li>
+            <li>
+              <code>figma file</code>、<code>figma nodes</code>、<code>figma images</code>、
+              <code>figma image-fills</code> 都支持直接传完整 Figma 链接。
+            </li>
+            <li>
+              对 <code>nodes</code> 和 <code>images</code>，如果链接中带有 <code>node-id</code>，CLI 会自动解析成{' '}
+              <code>ids</code>。
+            </li>
+            <li>
+              如果链接里没有 <code>node-id</code>，而当前命令又需要节点 ID，则需要显式传入 <code>--ids</code>。
+            </li>
           </ul>
         </div>
-        <p className="text-gray-600 text-sm">
-          拉取命令包前需确保项目已通过 <code>init</code> 初始化，且 <code>.specify/templates</code> 目录存在。使用{' '}
-          <code>--force</code> 可覆盖本地改动，请谨慎操作。
-        </p>
+
+        <div className="space-y-3">
+          <h3 className="text-xl font-medium">配置优先级</h3>
+          <ol className="list-decimal space-y-1 pl-5 text-sm text-gray-700">
+            <li>
+              命令行参数 <code>--token</code>、<code>--base-url</code>
+            </li>
+            <li>
+              环境变量 <code>FIGMA_TOOLKIT_FIGMA_TOKEN</code>、<code>FIGMA_TOKEN</code>、
+              <code>FIGMA_TOOLKIT_BASE_URL</code>
+            </li>
+            <li>
+              本地配置文件 <code>~/.figma-toolkit-cli/config.json</code>
+            </li>
+            <li>
+              默认官方地址 <code>https://api.figma.com</code>
+            </li>
+          </ol>
+        </div>
+
+        <div className="space-y-3">
+          <h3 className="text-xl font-medium">推荐使用流程</h3>
+          <CodeBlock
+            language="bash"
+            code={`npm install -g @klaaay/figma-toolkit-cli
+figma-toolkit config set-token <your-figma-token>
+figma-toolkit figma nodes "https://www.figma.com/design/<fileKey>/<name>?node-id=1-2"
+figma-toolkit figma images "https://www.figma.com/design/<fileKey>/<name>?node-id=1-2" --format png --scale 2`}
+          />
+        </div>
       </section>
     </div>
   );

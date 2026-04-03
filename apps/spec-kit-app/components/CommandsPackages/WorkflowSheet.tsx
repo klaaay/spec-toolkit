@@ -59,7 +59,7 @@ export function WorkflowSheet({ packageName, packagePath, isOpen, onClose }: Wor
       <SheetContent side="right" className="w-full p-0 sm:max-w-4xl">
         <div className="flex h-full flex-col gap-4 p-6">
           <SheetHeader className="gap-3">
-            <SheetTitle className="text-lg font-semibold">命令包工作流</SheetTitle>
+            <SheetTitle className="text-lg font-semibold">命令包流程说明</SheetTitle>
             <SheetDescription className="text-xs text-muted-foreground">{packageName} - workflow.md</SheetDescription>
           </SheetHeader>
           <div className="mt-4 flex-1 overflow-auto">

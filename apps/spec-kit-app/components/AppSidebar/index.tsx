@@ -72,7 +72,7 @@ export function AppSidebar() {
                 <SidebarMenuButton asChild isActive={isAuxiliaryActive}>
                   <span className="flex items-center gap-2">
                     <LifeBuoyIcon className="h-4 w-4" />
-                    其他辅助
+                    辅助依赖
                   </span>
                 </SidebarMenuButton>
               </Link>
@@ -82,7 +82,7 @@ export function AppSidebar() {
                     <SidebarMenuSubButton asChild isActive={isPluginActive}>
                       <span className="flex items-center gap-2">
                         <PuzzleIcon className="h-4 w-4" />
-                        辅助插件
+                        插件依赖
                       </span>
                     </SidebarMenuSubButton>
                   </Link>
@@ -92,7 +92,7 @@ export function AppSidebar() {
                     <SidebarMenuSubButton asChild isActive={isMcpActive}>
                       <span className="flex items-center gap-2">
                         <ServerIcon className="h-4 w-4" />
-                        辅助 MCP
+                        MCP 依赖
                       </span>
                     </SidebarMenuSubButton>
                   </Link>

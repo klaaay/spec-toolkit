@@ -41,7 +41,7 @@ export function AddCommandPackageGuide({ show }: AddCommandPackageGuideProps) {
             </div>
             <div className="space-y-1">
               <div className="text-sm font-semibold leading-5 text-primary">如何添加命令包</div>
-              <div className="text-xs text-muted-foreground">按照示例结构创建或更新本地命令包资源。</div>
+              <div className="text-xs text-muted-foreground">按照示例结构创建或更新本地命令包内容。</div>
             </div>
           </div>
           <Button
@@ -64,14 +64,14 @@ export function AddCommandPackageGuide({ show }: AddCommandPackageGuideProps) {
             <SheetHeader className="gap-2 px-6 pt-6 text-left">
               <SheetTitle className="text-lg font-semibold">如何添加命令包</SheetTitle>
               <SheetDescription className="text-xs text-muted-foreground">
-                参考以下步骤将自定义命令包添加到本地资源目录。
+                参考以下步骤将自定义命令包内容添加到本地目录。
               </SheetDescription>
             </SheetHeader>
             <div className="flex-1 overflow-auto px-6 pb-6">
               <div className="space-y-6 text-sm leading-6 text-muted-foreground">
                 <section className="space-y-2">
                   <div className="text-base font-semibold text-foreground">步骤 1：克隆命令包模板仓库</div>
-                  <p>克隆 spec-toolkit 仓库，获取命令包示例资源。</p>
+                  <p>克隆 spec-toolkit 仓库，获取命令包示例内容。</p>
                   <pre className="overflow-auto rounded-lg bg-muted p-3 text-xs leading-6">
                     <code>git clone https://github.com/klaaay/spec-toolkit.git</code>
                   </pre>
@@ -80,7 +80,7 @@ export function AddCommandPackageGuide({ show }: AddCommandPackageGuideProps) {
                 <section className="space-y-3">
                   <div className="text-base font-semibold text-foreground">步骤 2：按目录结构添加命令包</div>
                   <p>
-                    在 <code>spec-kit-app/public/commands-packages</code> 目录下，按照如下结构放置自定义命令包资源：
+                    在 <code>spec-kit-app/public/commands-packages</code> 目录下，按照如下结构放置自定义命令包内容：
                   </p>
                   <pre className="overflow-auto rounded-lg bg-muted p-3 text-xs leading-6">
                     <code>{`└── fe

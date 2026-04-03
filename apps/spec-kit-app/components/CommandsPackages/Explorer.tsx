@@ -237,7 +237,7 @@ export function CommandsPackagesExplorer({ root }: ExplorerProps) {
   if (!currentDirectory) {
     return (
       <div className="rounded-lg border border-destructive/40 bg-destructive/5 p-6 text-destructive">
-        无法定位目录，请检查命令包资源是否存在。
+        无法定位目录，请检查命令包内容是否存在。
       </div>
     );
   }
@@ -364,7 +364,7 @@ export function CommandsPackagesExplorer({ root }: ExplorerProps) {
                       type="button"
                       className="w-full rounded-sm px-2 py-1 text-left transition-colors hover:bg-muted"
                       onClick={() => handleOpenMeta(item)}>
-                      查看命令包信息
+                      查看命令包详情
                     </button>
                   ) : null}
                   {canShowWorkflow ? (
@@ -430,7 +430,7 @@ export function CommandsPackagesExplorer({ root }: ExplorerProps) {
               <AddCommandPackageGuide show={currentPath.length === 0} />
             </div>
             <p className="text-sm text-muted-foreground mb-4">
-              双击进入下级目录或打开文件，点击卡片右上角的菜单即可查看详情和操作。
+              双击进入下级目录或打开文件，点击卡片右上角的菜单即可查看命令包详情和操作。
             </p>
             {categorizedItems ? (
               <div className="space-y-6">
@@ -538,7 +538,7 @@ export function CommandsPackagesExplorer({ root }: ExplorerProps) {
         <DialogContent>
           <DialogHeader className="text-left">
             <DialogTitle>快速生成安装指令</DialogTitle>
-            <DialogDescription>选择 AI 助手与脚本类型，即可生成当前命令包的拉取指令。</DialogDescription>
+            <DialogDescription>选择 AI 助手与脚本类型，即可生成当前命令包的安装指令。</DialogDescription>
           </DialogHeader>
           {installDialog ? (
             <div className="space-y-6">

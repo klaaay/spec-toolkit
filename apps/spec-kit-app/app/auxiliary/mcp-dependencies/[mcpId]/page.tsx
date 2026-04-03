@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: McpDependenciesDetailPageProp
   }
 
   return {
-    title: `${mcp.name} - 辅助 MCP`,
+    title: `${mcp.name} - MCP 依赖`,
     description: mcp.summary,
   };
 }

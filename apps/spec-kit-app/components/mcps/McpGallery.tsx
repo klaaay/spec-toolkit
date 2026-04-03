@@ -17,7 +17,7 @@ export function McpGallery({ mcps }: McpGalleryProps) {
   if (mcps.length === 0) {
     return (
       <div className="rounded-lg border border-dashed bg-white p-8 text-center text-sm text-muted-foreground">
-        暂无可展示的 辅助 MCP。
+        暂无可展示的 MCP 依赖。
       </div>
     );
   }

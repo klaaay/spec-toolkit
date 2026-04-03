@@ -77,7 +77,7 @@ export function CommandPackageMetaSheet({ activeMeta, onClose, onOpenFile }: Com
               </div>
               {activeMeta.meta.commands && activeMeta.meta.commands.length > 0 ? (
                 <div className="space-y-3">
-                  <div className="text-base font-semibold">Commands</div>
+                  <div className="text-base font-semibold">命令</div>
                   <div className="space-y-2">
                     {activeMeta.meta.commands.map(command => (
                       <div
@@ -108,7 +108,7 @@ export function CommandPackageMetaSheet({ activeMeta, onClose, onOpenFile }: Com
               ) : null}
               {activeMeta.meta.agents && activeMeta.meta.agents.length > 0 ? (
                 <div className="space-y-3">
-                  <div className="text-base font-semibold">Agents</div>
+                  <div className="text-base font-semibold">代理提示词</div>
                   <div className="space-y-2">
                     {activeMeta.meta.agents.map(agent => (
                       <div
@@ -138,7 +138,7 @@ export function CommandPackageMetaSheet({ activeMeta, onClose, onOpenFile }: Com
               ) : null}
               {displaySkills.length > 0 ? (
                 <div className="space-y-3">
-                  <div className="text-base font-semibold">Skills</div>
+                  <div className="text-base font-semibold">技能</div>
                   <div className="space-y-2">
                     {displaySkills.map(skill => (
                       <div key={skill.id} className="rounded-lg border bg-muted/20 p-3 text-xs transition-colors">
@@ -164,7 +164,7 @@ export function CommandPackageMetaSheet({ activeMeta, onClose, onOpenFile }: Com
                         </div>
                         {skill.references && skill.references.length > 0 ? (
                           <div className="mt-3 space-y-2 border-t pt-3">
-                            <div className="text-xs font-medium text-muted-foreground">References</div>
+                            <div className="text-xs font-medium text-muted-foreground">参考资料</div>
                             {skill.references.map(reference => (
                               <div
                                 key={reference.id}

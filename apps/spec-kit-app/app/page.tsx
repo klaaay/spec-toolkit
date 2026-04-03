@@ -6,14 +6,13 @@ import { CodeBlock } from '@/components/ui/code-block';
 const capabilityCards = [
   {
     title: 'spec-ts CLI',
-    description:
-      'TypeScript 版 Spec Kit CLI。负责初始化项目、检查环境，并把命令包同步到本地项目，供 AI 助手读取和执行。',
+    description: 'TypeScript 版 Spec Kit CLI。负责初始化项目模板、检查环境，并将命令包内容写入本地项目目录。',
     detail: '常用命令：spec-ts init、spec-ts check、spec-ts pull-package',
   },
   {
     title: '命令包仓库',
     description:
-      '文档站同时托管可被 `spec-ts` 拉取和消费的命令包内容。每个命令包主要由 commands、skills、模板、代理提示词和依赖说明等 Markdown 或配置文件组成。',
+      '文档站同时托管可被 `spec-ts` 拉取并写入项目的命令包内容。每个命令包主要由 commands、skills、模板、代理提示词和依赖说明等 Markdown 或配置文件组成。',
     detail: '按方向可分为自动化、Spec 开发、前端协作、阅读辅助和设计相关内容。',
     href: '/commands-packages',
     hrefLabel: '查看命令包广场',
@@ -35,18 +34,17 @@ const moduleCards = [
   {
     path: 'packages/spec-kit-ts',
     title: 'Spec 工作流 CLI',
-    description:
-      '提供 Spec Kit 核心命令流程，并支持多种 AI 助手模板。适合在新项目中初始化 Spec-Driven Development 工作流。',
+    description: '提供项目初始化、环境检查和命令包拉取能力，并按不同 AI 助手生成对应命令目录与模板。',
   },
   {
     path: 'apps/spec-kit-app',
     title: '文档站与静态仓库',
-    description: '用于展示使用说明、命令包内容以及辅助依赖信息，同时也是命令包的对外静态分发入口。',
+    description: '用于展示 CLI 使用说明、命令包内容以及辅助依赖信息，同时也是命令包内容的静态分发入口。',
   },
   {
     path: 'packages/figma-toolkit-cli',
     title: 'Figma 数据工具',
-    description: '面向设计协作场景的 CLI，可读取文件、节点与图片资源，适合离线准备素材或批量下载设计资产。',
+    description: '提供本地配置管理与 Figma 官方 REST API 调用能力，可读取文件、节点和图片资源。',
   },
   {
     path: 'configs/*',
@@ -58,20 +56,19 @@ const moduleCards = [
 const scenarioCards = [
   {
     title: '在项目里落地 Spec Kit',
-    description: '如果你需要在仓库里初始化 `/speckit.*` 命令、建立规范文档与实施流程，入口是 `spec-ts`。',
+    description: '如果你需要初始化 `/speckit.*` 命令、生成项目模板并建立基础目录，入口是 `spec-ts`。',
   },
   {
     title: '补充领域命令与工作流',
-    description:
-      '如果你希望给 AI 助手增加前端规则、Figma 协作、自动化或 brainstorming 能力，入口是命令包广场与 `pull-package`。',
+    description: '如果你希望把额外的 commands、skills 和模板写入项目，入口是命令包广场与 `pull-package`。',
   },
   {
     title: '读取 Figma 文件与资源',
-    description: '如果你需要获取节点结构、导出图片或下载填充资源，入口是 `figma-toolkit` CLI，而不是文档站页面。',
+    description: '如果你需要获取节点结构、导出图片或下载填充资源，入口是 `figma-toolkit` CLI。',
   },
   {
     title: '复用统一前端配置',
-    description: '如果你只想复用工程化配置，可以直接使用 `configs/*` 下的 ESLint 与 UnoCSS 包，不必引入整套工作流。',
+    description: '如果你只关注配置类 package，可以直接查看并使用 `configs/*` 下的 ESLint 与 UnoCSS 配置。',
   },
 ] as const;
 
@@ -81,7 +78,7 @@ export default function Home() {
       <header className="mb-12">
         <h1 className="text-4xl font-bold mb-4">Spec ToolKit 文档</h1>
         <p className="text-xl text-gray-600 mt-4">
-          围绕 Spec-Driven Development 与前端协作流程构建的 CLI、命令包、文档站与工程配置集合
+          围绕 Spec-Driven Development 与前端协作流程构建的 CLI、命令包内容、文档站与工程配置集合
         </p>
       </header>
 
@@ -95,7 +92,7 @@ export default function Home() {
               <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">spec-ts</code>
               CLI、
               <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">figma-toolkit</code>
-              CLI、命令包静态仓库、文档站
+              CLI、命令包内容、文档站
             </strong>
             ，以及可独立复用的前端工程配置。
           </p>
@@ -154,12 +151,12 @@ export default function Home() {
           <div className="space-y-4">
             <div>
               <h3 className="mb-2 text-lg font-semibold">使用 spec-ts</h3>
-              <p className="mb-2 text-sm text-gray-600">安装并初始化 Spec Kit 工作流：</p>
+              <p className="mb-2 text-sm text-gray-600">安装并初始化项目模板：</p>
               <CodeBlock language="bash" code={`npm install -g @klaaay/spec-kit-ts`} />
             </div>
             <div>
               <CodeBlock language="bash" code={`spec-ts init my-project --ai claude`} />
-              <p className="mt-2 text-sm text-gray-600">在新目录中创建 Spec Kit 模板、斜杠命令和基础文件。</p>
+              <p className="mt-2 text-sm text-gray-600">在新目录中创建项目模板、命令目录和基础文件。</p>
             </div>
             <div>
               <CodeBlock language="bash" code={`spec-ts check`} />
@@ -168,7 +165,7 @@ export default function Home() {
             <div>
               <CodeBlock language="bash" code={`spec-ts pull-package superpowers --ai claude`} />
               <p className="mt-2 text-sm text-gray-600">
-                把命令包同步到当前项目。更多可用包可在
+                把命令包内容写入当前项目。更多可用包可在
                 <Link href="/commands-packages" className="mx-1 text-blue-600 hover:underline">
                   命令包广场
                 </Link>
@@ -241,11 +238,11 @@ export default function Home() {
                 <ChevronRightIcon className="ml-2 h-5 w-5" />
               </h3>
             </div>
-            <p className="text-gray-600">浏览当前内置命令包，查看其中包含的命令、技能、模板与依赖说明。</p>
+            <p className="text-gray-600">浏览当前提供的命令包内容，查看其中包含的命令、技能、模板与依赖说明。</p>
             <div className="mt-4 border-t border-gray-200 pt-4">
               <p className="text-sm text-gray-500">
                 使用 <code className="rounded bg-gray-100 px-2 py-1 text-xs">spec-ts pull-package</code>{' '}
-                将这些内容同步到你的项目里。
+                将这些内容写入你的项目里。
               </p>
             </div>
           </Link>
