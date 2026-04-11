@@ -11,8 +11,8 @@ description: 按 aged 前端默认路径实现功能：service、axios、interce
 
 1. 请求能力统一收口到 `service`
 2. `service/core/client.ts` 负责 axios client
-3. `service/core/interceptors.ts` 负责拦截器
-4. `service/core/errors.ts` 负责统一错误结构
+3. `service/core/interceptors.ts` 负责拦截器，自动拆包后端 `{"data": ...}` 信封，service 方法直接拿到业务数据
+4. `service/core/errors.ts` 负责统一错误结构，从后端 `{"error": ...}` 中提取
 5. `service/modules/*` 负责模块 API
 6. hooks、pages、components 只消费模块 service
 

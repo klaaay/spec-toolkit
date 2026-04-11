@@ -24,13 +24,14 @@ modules/<name>/
 
 ## 实施规则
 
-1. `router.py` 只处理 HTTP 层
+1. `router.py` 只处理 HTTP 层，返回值统一用 `success_response()` 包裹：`return success_response({"items": ...})`
 2. `service.py` 是默认业务入口
 3. `schemas.py` 放请求/响应 DTO
 4. `models.py` 放 ORM model
-5. `repository.py` 只在查询复杂或需要复用查询拼装时引入
-6. `platform` 不承载业务代码
-7. `shared` 不成为业务逻辑回收站
+5. `worker.py` 是后台任务扩展点，基线为 no-op
+6. `repository.py` 只在查询复杂或需要复用查询拼装时引入
+7. `platform` 不承载业务代码
+8. `shared` 不成为业务逻辑回收站
 
 ## 验证要求
 
