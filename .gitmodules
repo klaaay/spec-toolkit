@@ -1,0 +1,3 @@
+[submodule "aged-fullstack-template"]
+	path = aged-fullstack-template
+	url = git@github.com:klaaay/aged-fullstack-template.git
