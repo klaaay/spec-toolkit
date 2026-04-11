@@ -29,7 +29,7 @@
 
 ## 当前模板脚本事实
 
-- 初始化脚本：`scripts/init-project.mjs`
-- 自举验证脚本：`scripts/verify-init-project.mjs`
+- 初始化脚本：`scripts/init-project.mjs`，替换范围覆盖配置文件、前端源码（含 `ExamplePage.tsx`）、后端配置和 CI 脚本
+- 自举验证脚本：`scripts/verify-init-project.mjs`，验证设置替换和包名作用域替换是否成功
 - 全量测试：`pnpm test`
 - 前端构建：`pnpm build:web`
