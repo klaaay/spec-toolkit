@@ -27,7 +27,7 @@
 ## 与 superpowers 的边界
 
 - `superpowers` 管总流程：设计、计划、执行、验证、收尾
-- `aged-fullstack` 管领域规则：模板起步、模块边界、前端默认路径、联调与关键校验
+- `aged-fullstack` 管领域规则：模板起步、接口设计、后端模块边界、前端默认路径、认证授权、安全规范、可靠性要求，以及联调与交付校验
 
 如果需求仍在讨论，先使用 `superpowers-brainstorming`。
 如果实施计划还没写，先使用 `superpowers-writing-plans`。
