@@ -1,0 +1,28 @@
+{
+  "package": "media-processing",
+  "version": "1.0.0",
+  "category": "媒体处理",
+  "commands": [],
+  "skills": [
+    {
+      "id": "media-processing-tinypng",
+      "file": "skills/media-processing-tinypng/SKILL.md",
+      "output": "media-processing-tinypng/SKILL.md",
+      "description": "使用 TinyPNG API 压缩 png、jpg、jpeg、webp 图片，自动在 Git 根目录的 .specify/configs.json 中读取或保存 tinyPNGApiKey，并用压缩结果覆盖原图。",
+      "scripts": [
+        {
+          "id": "compress-image",
+          "file": "skills/media-processing-tinypng/scripts/compress-image.js",
+          "description": "TinyPNG 图片压缩脚本，支持读取和写回 tinyPNGApiKey，并用压缩结果覆盖原图。"
+        }
+      ]
+    }
+  ],
+  "otherDependencies": {
+    "tinypng-api": {
+      "name": "TinyPNG API",
+      "description": "TinyPNG 开发者接口，用于压缩 png、jpg、jpeg、webp 图片。",
+      "docUrl": "https://tinypng.com/developers"
+    }
+  }
+}
