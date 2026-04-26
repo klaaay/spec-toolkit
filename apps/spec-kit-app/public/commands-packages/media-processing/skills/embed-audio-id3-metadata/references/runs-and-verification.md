@@ -12,7 +12,7 @@
 ## 推荐流程
 
 1. 安装依赖：`pip install mutagen zhconv`
-2. 执行：  
+2. 执行（同时处理 `.mp3`、`.m4a`、`.flac`）：  
    `python3 scripts/embed_mp3_metadata.py "<根目录>" --passes 3`
 3. 保存日志：  
    `... 2>&1 | tee embed_run.log`
@@ -22,17 +22,23 @@
 
 ## 日志字段含义（节选）
 
-| 片段              | 含义                       |
-| ----------------- | -------------------------- |
-| `local_cover`     | 使用了同文件夹内图片       |
-| `remote_cover`    | 使用了拉取的在线封面       |
-| `no_cover`        | 未找到封面                 |
+| 片段 | 含义 |
+|------|------|
+| `local_cover` | 使用了同文件夹内图片 |
+| `remote_cover` | 使用了拉取的在线封面 |
+| `no_cover` | 未找到封面 |
 | `lyrics_official` | 平台词（`lyricUser` 为空） |
-| `lyrics_fan`      | 用户上传词                 |
-| `no_lyrics`       | 该遍仍未写入歌词           |
+| `lyrics_fan` | 用户上传词 |
+| `no_lyrics` | 该遍仍未写入歌词 |
 
 ## 根目录解析顺序
 
 1. 命令行第一个参数（音乐库根目录）
 2. 环境变量 `MUSIC_EMBED_ROOT`
 3. 脚本所在目录（适用于把脚本放在库根目录旁时）
+
+## 格式与验收差异
+
+- **MP3**：可用 `mid3v2`、`ffprobe` 或 `mutagen` 抽查 `APIC` / `USLT`。
+- **M4A**：可用 `mutagen.mp4.MP4` 查看 `covr`、`©lyr` 等。
+- **FLAC**：可用 `metaflac --list` 或 `mutagen.flac.FLAC` 查看 `Picture` 与 `UNSYNCEDLYRICS`。

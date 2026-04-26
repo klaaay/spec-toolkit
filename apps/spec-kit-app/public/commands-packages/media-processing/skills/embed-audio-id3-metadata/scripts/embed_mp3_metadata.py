@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Batch embed cover, artist/album/title, and lyrics into MP3 files under this tree."""
+"""Batch embed cover, artist/album/title, and lyrics into MP3 / M4A / FLAC under this tree."""
 
 from __future__ import annotations
 
@@ -19,6 +19,8 @@ from pathlib import Path
 
 from mutagen.id3 import APIC, TALB, TDRC, TIT2, TPE1, USLT
 from mutagen.mp3 import MP3
+from mutagen.mp4 import MP4, MP4Cover
+from mutagen.flac import FLAC, Picture
 
 warnings.filterwarnings(
     "ignore",
@@ -39,7 +41,6 @@ def resolve_music_root(cli_root: str | None) -> Path:
     if cli_root:
         return Path(cli_root).expanduser().resolve()
     return Path(__file__).resolve().parent
-
 UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 NETEASE_REFERER = "https://music.163.com/"
 
@@ -97,7 +98,7 @@ def strip_track_prefix(title: str) -> str:
 
 
 def parse_track(filename: str, folder_meta: dict) -> tuple[str, str]:
-    base = html.unescape(re.sub(r"\.mp3$", "", filename, flags=re.I))
+    base = html.unescape(re.sub(r"\.(mp3|m4a|flac)$", "", filename, flags=re.I))
     if " - " in base:
         left, title = base.split(" - ", 1)
         artist = left.strip()
@@ -110,6 +111,7 @@ def parse_track(filename: str, folder_meta: dict) -> tuple[str, str]:
 
 
 def find_local_cover(dirpath: Path) -> Path | None:
+    # Prefer known filenames
     for name in COVER_NAMES:
         for ext in IMAGE_EXTS:
             p = dirpath / f"{name}{ext}"
@@ -279,6 +281,7 @@ def rank_netease_hits(hits: list[dict], artist: str, title: str, album: str) -> 
 
 
 def netease_hit_is_variant_recording(hit_name: str) -> bool:
+    """Live / remix / 伴奏等，与录音室版区分。"""
     name = hit_name or ""
     low = name.lower()
     keys = (
@@ -306,11 +309,16 @@ def pick_netease_track_for_lyrics(
     local_title: str,
     max_try: int = 22,
 ) -> tuple[int | None, str | None, str]:
+    """
+    在排序结果中取词：尽量「平台官方词」(lyricUser 为空)。
+    非混音本地文件：录音室官方 > Live/混音官方 > 录音室用户词 > Live 用户词。
+    本地为混音等：只看是否官方，其次按排序。
+    """
     if not ranked_hits:
         return None, None, "none"
 
     allow_variant = local_title_implies_variant(local_title)
-    best: tuple[int, int, int, str, bool] | None = None
+    best: tuple[int, int, int, str, bool] | None = None  # tier, idx, sid, lrc, official
 
     for idx, h in enumerate(ranked_hits[:max_try]):
         sid = int(h["id"])
@@ -418,10 +426,107 @@ def apply_tags(
     audio.save(v2_version=3)
 
 
-def process_file(mp3_path: Path, cache: dict) -> str:
-    folder = mp3_path.parent.name
+def apply_tags_m4a(
+    path: Path,
+    artist: str,
+    title: str,
+    album: str,
+    year: str | None,
+    cover_data: bytes | None,
+    cover_mime: str,
+    lyrics: str | None,
+) -> None:
+    audio = MP4(path)
+    if audio.tags is None:
+        audio.add_tags()
+    tags = audio.tags
+    assert tags is not None
+
+    tags["\xa9nam"] = [title]
+    if artist.strip():
+        tags["\xa9ART"] = [artist]
+    else:
+        cur = tags.get("\xa9ART")
+        if not (cur and isinstance(cur, list) and str(cur[0]).strip()):
+            alt = tags.get("aART")
+            if alt and isinstance(alt, list) and str(alt[0]).strip():
+                tags["\xa9ART"] = [str(alt[0])]
+    if album:
+        tags["\xa9alb"] = [album]
+    else:
+        tags.pop("\xa9alb", None)
+    if year:
+        tags["\xa9day"] = [year]
+    else:
+        tags.pop("\xa9day", None)
+
+    if lyrics and lyrics.strip():
+        tags["\xa9lyr"] = [lyrics.strip()]
+    else:
+        tags.pop("\xa9lyr", None)
+
+    if cover_data:
+        if cover_mime in ("image/jpeg", "image/jpg"):
+            fmt = MP4Cover.FORMAT_JPEG
+        elif cover_mime == "image/png":
+            fmt = MP4Cover.FORMAT_PNG
+        else:
+            fmt = MP4Cover.FORMAT_JPEG
+        tags["covr"] = [MP4Cover(cover_data, imageformat=fmt)]
+    else:
+        tags.pop("covr", None)
+
+    audio.save()
+
+
+def apply_tags_flac(
+    path: Path,
+    artist: str,
+    title: str,
+    album: str,
+    year: str | None,
+    cover_data: bytes | None,
+    cover_mime: str,
+    lyrics: str | None,
+) -> None:
+    audio = FLAC(path)
+    audio.clear_pictures()
+    if cover_data:
+        pic = Picture()
+        pic.type = 3
+        pic.mime = cover_mime
+        pic.desc = "Cover"
+        pic.width = 0
+        pic.height = 0
+        pic.depth = 24
+        pic.colors = 0
+        pic.data = cover_data
+        audio.add_picture(pic)
+
+    audio["TITLE"] = [title]
+    if artist.strip():
+        audio["ARTIST"] = [artist]
+    if album:
+        audio["ALBUM"] = [album]
+    elif "ALBUM" in audio:
+        del audio["ALBUM"]
+    if year:
+        audio["DATE"] = [year]
+    elif "DATE" in audio:
+        del audio["DATE"]
+
+    if lyrics and lyrics.strip():
+        audio["UNSYNCEDLYRICS"] = [lyrics.strip()]
+    elif "UNSYNCEDLYRICS" in audio:
+        del audio["UNSYNCEDLYRICS"]
+
+    audio.save()
+
+
+def process_file(audio_path: Path, cache: dict) -> str:
+    folder = audio_path.parent.name
     folder_meta = parse_album_dir(folder)
-    artist, title = parse_track(mp3_path.name, folder_meta)
+    artist, title = parse_track(audio_path.name, folder_meta)
     album = folder_meta.get("album") or folder
     year = folder_meta.get("year")
     ckey = f"album_art:{folder}:{album}"
@@ -429,7 +534,7 @@ def process_file(mp3_path: Path, cache: dict) -> str:
     cover_data: bytes | None = None
     cover_mime = "image/jpeg"
 
-    local = find_local_cover(mp3_path.parent)
+    local = find_local_cover(audio_path.parent)
     if local:
         cover_data = local.read_bytes()
         cover_mime = mime_for_path(local)
@@ -487,16 +592,42 @@ def process_file(mp3_path: Path, cache: dict) -> str:
 
     tag_title = strip_track_prefix(title) if re.match(r"^\d+\.\s*", title) else title
 
-    apply_tags(
-        mp3_path,
-        artist=artist,
-        title=tag_title,
-        album=album,
-        year=year,
-        cover_data=cover_data,
-        cover_mime=cover_mime,
-        lyrics=lyrics_text,
-    )
+    ext = audio_path.suffix.lower()
+    if ext == ".mp3":
+        apply_tags(
+            audio_path,
+            artist=artist,
+            title=tag_title,
+            album=album,
+            year=year,
+            cover_data=cover_data,
+            cover_mime=cover_mime,
+            lyrics=lyrics_text,
+        )
+    elif ext == ".m4a":
+        apply_tags_m4a(
+            audio_path,
+            artist=artist,
+            title=tag_title,
+            album=album,
+            year=year,
+            cover_data=cover_data,
+            cover_mime=cover_mime,
+            lyrics=lyrics_text,
+        )
+    elif ext == ".flac":
+        apply_tags_flac(
+            audio_path,
+            artist=artist,
+            title=tag_title,
+            album=album,
+            year=year,
+            cover_data=cover_data,
+            cover_mime=cover_mime,
+            lyrics=lyrics_text,
+        )
+    else:
+        raise ValueError(f"不支持的格式: {ext}")
 
     parts = []
     parts.append("ok")
@@ -513,22 +644,32 @@ def process_file(mp3_path: Path, cache: dict) -> str:
     return " ".join(parts)
 
 
+def iter_audio_files(root: Path) -> list[Path]:
+    out: list[Path] = []
+    for p in root.rglob("*"):
+        if not p.is_file():
+            continue
+        if p.suffix.lower() in (".mp3", ".m4a", ".flac"):
+            out.append(p)
+    return sorted(out)
+
+
 def run_once(root: Path) -> int:
-    mp3s = sorted(root.rglob("*.mp3"))
-    if not mp3s:
-        print("No MP3 files under", root, file=sys.stderr)
+    files = iter_audio_files(root)
+    if not files:
+        print("No MP3, M4A or FLAC files under", root, file=sys.stderr)
         return 1
 
     cache: dict = {}
     errors: list[tuple[Path, str]] = []
-    for i, p in enumerate(mp3s, 1):
+    for i, p in enumerate(files, 1):
         try:
             status = process_file(p, cache)
-            print(f"[{i}/{len(mp3s)}] {p.relative_to(root)} :: {status}")
+            print(f"[{i}/{len(files)}] {p.relative_to(root)} :: {status}")
             time.sleep(0.05)
         except Exception as e:
             errors.append((p, str(e)))
-            print(f"[{i}/{len(mp3s)}] FAIL {p.relative_to(root)} :: {e}", file=sys.stderr)
+            print(f"[{i}/{len(files)}] FAIL {p.relative_to(root)} :: {e}", file=sys.stderr)
 
     if errors:
         print(f"\nFailed: {len(errors)}", file=sys.stderr)
@@ -540,7 +681,7 @@ def run_once(root: Path) -> int:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="递归写入 MP3 内嵌封面、ID3 信息与歌词（网易云 + iTunes 兜底）。",
+        description="递归写入 MP3（ID3）、M4A（MP4 原子）、FLAC（Vorbis 注释 + Picture）内嵌封面、文本信息与歌词（网易云 + iTunes 兜底）。",
     )
     parser.add_argument(
         "root",

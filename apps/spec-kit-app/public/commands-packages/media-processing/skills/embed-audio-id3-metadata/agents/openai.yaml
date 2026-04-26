@@ -1,6 +1,6 @@
 interface:
-  display_name: 'MP3 内嵌元数据'
-  short_description: '封面、ID3、歌词（网易云优先官方词）与多遍扫描'
+  display_name: '音频内嵌元数据'
+  short_description: 'MP3 / M4A / FLAC 封面、标签、歌词（网易云优先官方词）与多遍扫描'
   default_prompt: >-
-    使用 embed-audio-id3-metadata：对给定音乐库根目录递归处理所有 MP3，写入内嵌封面与 ID3，
-    歌词优先网易云平台词；用 --passes 3 跑多遍并把日志里 no_lyrics 减到最少。
+    使用 embed-audio-id3-metadata：对给定音乐库根目录递归处理所有 MP3、M4A、FLAC，写入内嵌封面、
+    标签与歌词（歌词优先网易云平台词）；用 --passes 3 跑多遍并把日志里 no_lyrics 减到最少。

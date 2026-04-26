@@ -41,12 +41,12 @@
       "id": "embed-audio-id3-metadata",
       "file": "skills/embed-audio-id3-metadata/SKILL.md",
       "output": "embed-audio-id3-metadata/SKILL.md",
-      "description": "递归处理 MP3 内嵌封面、ID3（艺人/专辑/曲名/年份）与歌词（网易云优先平台词，iTunes 封面兜底）；支持繁简双搜、接口重试与 --passes 多遍扫描以抵消限流与空返回。适用于批量整理 MP3 标签、补封面与歌词、或用户提到 ID3、内嵌歌词、USLT、专辑图与网易云匹配时。",
+      "description": "递归处理 MP3（ID3）、M4A（MP4 原子）与 FLAC（Vorbis 注释 + Picture）内嵌封面、艺人/专辑/曲名/年份与歌词（网易云优先平台词，iTunes 封面兜底）；支持繁简双搜、接口重试与 --passes 多遍扫描。适用于批量整理 MP3/M4A/FLAC 标签、补封面与歌词、或用户提到 ID3、内嵌歌词、专辑图与网易云匹配时。",
       "scripts": [
         {
           "id": "embed-mp3-metadata",
           "file": "skills/embed-audio-id3-metadata/scripts/embed_mp3_metadata.py",
-          "description": "扫描音乐库根目录下全部 MP3，写入 APIC/USLT 与常用 ID3 帧；可选 --passes 连续多遍完整扫描。"
+          "description": "扫描音乐库根目录下全部 MP3、M4A 与 FLAC，写入封面与歌词（MP3：APIC/USLT；M4A：covr/©lyr；FLAC：Picture/UNSYNCEDLYRICS）；可选 --passes 连续多遍完整扫描。"
         }
       ]
     }
