@@ -4,3 +4,6 @@
 [submodule "ok-skills"]
 	path = ok-skills
 	url = https://github.com/mxyhi/ok-skills
+[submodule "agent-sprite-forge"]
+	path = agent-sprite-forge
+	url = git@github.com:0x0funky/agent-sprite-forge.git

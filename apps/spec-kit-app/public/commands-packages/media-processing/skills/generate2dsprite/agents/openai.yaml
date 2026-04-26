@@ -1,0 +1,4 @@
+interface:
+  display_name: "生成 2D 精灵"
+  short_description: "通用 2D 素材、组合包与透明 GIF"
+  default_prompt: "使用 $generate2dsprite 制作一套法师法术包：施法、弹道、受击三类精灵。"

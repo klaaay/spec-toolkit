@@ -1,0 +1,7 @@
+interface:
+  display_name: "生成 2D 地图"
+  short_description: "为 2D 游戏选用并搭建合适地图方案。"
+  default_prompt: "使用 $generate2dmap 选定合适的 2D 地图策略，并产出地图资源、碰撞数据与游戏内接入。"
+
+policy:
+  allow_implicit_invocation: true

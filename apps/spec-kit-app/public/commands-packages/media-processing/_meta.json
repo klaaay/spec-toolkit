@@ -16,6 +16,26 @@
           "description": "TinyPNG 图片压缩脚本，支持读取和写回 tinyPNGApiKey，并用压缩结果覆盖原图。"
         }
       ]
+    },
+    {
+      "id": "generate2dsprite",
+      "file": "skills/generate2dsprite/SKILL.md",
+      "output": "generate2dsprite/SKILL.md",
+      "description": "生成并后处理通用 2D 像素风素材与动画表：生物、角色、NPC、法术、弹道、受击、场景小件、召唤物等，并导出带透明底的 GIF。适用于：希望 Codex 从自然语言需求中推断资产方案、用内置 image_gen 生成纯色品红底的原始表图，并仅在本地做色键去背、切帧、对齐、质检与透明导出的场景。",
+      "scripts": [
+        {
+          "id": "generate2dsprite",
+          "file": "skills/generate2dsprite/scripts/generate2dsprite.py",
+          "description": "Sprite 表图本地后处理：品红去背、切帧、连通域过滤、对齐缩放、QC 元数据、透明 PNG 与 GIF 导出。"
+        }
+      ]
+    },
+    {
+      "id": "generate2dmap",
+      "file": "skills/generate2dmap/SKILL.md",
+      "output": "generate2dmap/SKILL.md",
+      "description": "面向 RPG、驯怪、战棋、街机、Canvas/HTML 等 2D 游戏，通过选用合适策略生成地图：单张烘焙背景、分层底图加道具精灵、瓦片地图/图块集，或混合方案。适用于：需要制作或修改 2D 地图、碰撞图、地图道具、类瓦片布局、俯视场景、视差/叠层、简单背景图，或「底图 + 精灵」式游戏场景时。",
+      "scripts": []
     }
   ],
   "otherDependencies": {
