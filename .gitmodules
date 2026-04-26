@@ -1,3 +1,6 @@
 [submodule "aged-fullstack-template"]
 	path = aged-fullstack-template
 	url = git@github.com:klaaay/aged-fullstack-template.git
+[submodule "ok-skills"]
+	path = ok-skills
+	url = https://github.com/mxyhi/ok-skills
