@@ -1,11 +1,6 @@
----
-name: aged-fullstack-integration-gate
-description: 对齐前后端契约、错误结构与关键验证命令，在收尾前完成最小联调校验。
----
-
 # 做 aged 全栈联调与关键校验
 
-这个 skill 用于在收尾前做最小联调校验。
+这个 reference 用于在收尾前做最小联调校验。
 
 ## 适用场景
 

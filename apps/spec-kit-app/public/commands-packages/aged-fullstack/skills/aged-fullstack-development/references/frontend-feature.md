@@ -1,11 +1,6 @@
----
-name: aged-fullstack-frontend-feature
-description: 按 aged 前端默认路径实现功能：service、axios、interceptors、hooks、pages 与 components。
----
-
 # 按 aged 默认路径实现前端功能
 
-这个 skill 用于在 `aged-*` 项目里按统一方式实现前端功能。
+这个 reference 用于在 `aged-*` 项目里按统一方式实现前端功能。
 
 ## 默认实现路径
 

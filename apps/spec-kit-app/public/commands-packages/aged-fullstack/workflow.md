@@ -14,15 +14,14 @@
 ## 当前技能
 
 - `aged-fullstack-development`
-  - 作用：识别当前任务属于起步、后端、前端还是联调，并引导到正确的 aged skill
-- `aged-fullstack-bootstrap`
-  - 作用：从模板起步，执行初始化、环境准备、首次运行和自举验证
-- `aged-fullstack-backend-module`
-  - 作用：按 module-first 路径实现或修改 FastAPI 模块
-- `aged-fullstack-frontend-feature`
-  - 作用：按 service、axios、hooks、pages/components 的路径实现前端功能
-- `aged-fullstack-integration-gate`
-  - 作用：对齐前后端契约、错误结构与关键验证命令
+  - 作用：识别当前任务属于起步、后端、前端还是联调，并引导到正确的 reference
+  - references：
+    - `template-facts` — 模板当前事实
+    - `recommended-rules` — aged 推荐规范
+    - `bootstrap` — 从模板起步、初始化与自举验证
+    - `backend-module` — 按 module-first 路径实现或修改 FastAPI 模块
+    - `frontend-feature` — 按 service、axios、hooks、pages/components 的路径实现前端功能
+    - `integration-gate` — 对齐前后端契约、错误结构与关键验证命令
 
 ## 与 superpowers 的边界
 
@@ -40,8 +39,8 @@ flowchart TD
     A[superpowers-brainstorming] --> B[superpowers-writing-plans]
     B --> C[superpowers-subagent-driven-development 或 superpowers-executing-plans]
     C --> D[aged-fullstack-development]
-    D --> E[aged-fullstack-bootstrap]
-    D --> F[aged-fullstack-backend-module]
-    D --> G[aged-fullstack-frontend-feature]
-    D --> H[aged-fullstack-integration-gate]
+    D --> E[references/bootstrap]
+    D --> F[references/backend-module]
+    D --> G[references/frontend-feature]
+    D --> H[references/integration-gate]
 ```

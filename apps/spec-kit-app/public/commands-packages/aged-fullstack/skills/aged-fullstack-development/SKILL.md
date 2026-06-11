@@ -1,9 +1,9 @@
 ---
 name: aged-fullstack-development
-description: aged-* 项目的全栈开发主入口。识别当前任务属于起步、后端、前端还是联调，并将任务导向正确的 aged skill。
+description: aged-* 项目的全栈开发主入口。识别当前任务属于起步、后端、前端还是联调，并将任务导向正确的 aged reference。
 ---
 
-# 选择正确的 aged 全栈 skill
+# 选择正确的 aged 全栈路径
 
 这个 skill 只做领域分流，不接管总流程。
 
@@ -22,16 +22,16 @@ description: aged-* 项目的全栈开发主入口。识别当前任务属于起
 ## 分流规则
 
 - 从模板起一个新项目、检查初始化链路、准备环境：
-  使用 `aged-fullstack-bootstrap`
+  读 `references/bootstrap.md`
 - 新增或修改 FastAPI 模块、处理 ORM、Session、migration：
-  使用 `aged-fullstack-backend-module`
+  读 `references/backend-module.md`
 - 新增或修改前端页面、hooks、service、axios、错误结构：
-  使用 `aged-fullstack-frontend-feature`
+  读 `references/frontend-feature.md`
 - 做接口接入、联调、关键验证、自举校验：
-  使用 `aged-fullstack-integration-gate`
+  读 `references/integration-gate.md`
 
 ## 关键原则
 
 - 不自己接管 brainstorming、planning、finish 流程
 - 不把模板事实和推荐规范混成一句话
-- 如果任务跨多个场景，先说明主次，再选择第一个进入的 skill
+- 如果任务跨多个场景，先说明主次，再选择第一个进入的 reference

@@ -1,11 +1,6 @@
----
-name: aged-fullstack-bootstrap
-description: 从 aged-fullstack-template 起步：init、环境准备、首次运行和自举验证。
----
-
 # 从 aged-fullstack-template 起步
 
-这个 skill 处理“如何正确从模板起项目”的问题。
+这个 reference 处理“如何正确从模板起项目”的问题。
 
 ## 适用场景
 

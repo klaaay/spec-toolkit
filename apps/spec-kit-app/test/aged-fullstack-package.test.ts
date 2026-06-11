@@ -25,11 +25,13 @@ function findDirectory(
 }
 
 describe('aged-fullstack package', () => {
-  it('exposes package metadata, workflow and five aged-prefixed skills', async () => {
+  it('exposes package metadata, workflow and a single aged-fullstack-development skill with references', async () => {
     const tree = await getCommandsPackagesTree();
     const packageDir = findDirectory(tree, 'aged-fullstack');
     const primarySkillIds =
       packageDir?.meta?.skills?.map(skill => skill.id).filter(id => !id.includes('.references.')) ?? [];
+    const referenceSkillIds =
+      packageDir?.meta?.skills?.map(skill => skill.id).filter(id => id.includes('.references.')) ?? [];
 
     expect(packageDir).toBeDefined();
     expect(packageDir?.meta).toMatchObject({
@@ -38,18 +40,14 @@ describe('aged-fullstack package', () => {
     });
 
     expect(packageDir?.children.some(child => child.type === 'file' && child.name === 'workflow.md')).toBe(true);
-    expect(primarySkillIds).toEqual([
-      'aged-fullstack-development',
-      'aged-fullstack-bootstrap',
-      'aged-fullstack-backend-module',
-      'aged-fullstack-frontend-feature',
-      'aged-fullstack-integration-gate',
-    ]);
-    expect(packageDir?.meta?.skills?.map(skill => skill.id)).toContain(
+    expect(primarySkillIds).toEqual(['aged-fullstack-development']);
+    expect(referenceSkillIds).toEqual([
       'aged-fullstack-development.references.template-facts',
-    );
-    expect(packageDir?.meta?.skills?.map(skill => skill.id)).toContain(
       'aged-fullstack-development.references.recommended-rules',
-    );
+      'aged-fullstack-development.references.bootstrap',
+      'aged-fullstack-development.references.backend-module',
+      'aged-fullstack-development.references.frontend-feature',
+      'aged-fullstack-development.references.integration-gate',
+    ]);
   });
 });

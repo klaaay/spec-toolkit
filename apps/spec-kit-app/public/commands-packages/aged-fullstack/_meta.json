@@ -8,7 +8,7 @@
       "id": "aged-fullstack-development",
       "file": "skills/aged-fullstack-development/SKILL.md",
       "output": "aged-fullstack-development/SKILL.md",
-      "description": "aged-* 项目的全栈开发主入口。识别当前任务属于起步、后端、前端还是联调，并将任务导向正确的 aged skill。"
+      "description": "aged-* 项目的全栈开发主入口。识别当前任务属于起步、后端、前端还是联调，并将任务导向正确的 aged reference。"
     },
     {
       "id": "aged-fullstack-development.references.template-facts",
@@ -23,27 +23,27 @@
       "description": "aged-* 推荐规范：module-first、service 收口、稳定错误结构与最小验证要求。"
     },
     {
-      "id": "aged-fullstack-bootstrap",
-      "file": "skills/aged-fullstack-bootstrap/SKILL.md",
-      "output": "aged-fullstack-bootstrap/SKILL.md",
+      "id": "aged-fullstack-development.references.bootstrap",
+      "file": "skills/aged-fullstack-development/references/bootstrap.md",
+      "output": "aged-fullstack-development/references/bootstrap.md",
       "description": "从 aged-fullstack-template 起步：init、环境准备、首次运行和自举验证。"
     },
     {
-      "id": "aged-fullstack-backend-module",
-      "file": "skills/aged-fullstack-backend-module/SKILL.md",
-      "output": "aged-fullstack-backend-module/SKILL.md",
+      "id": "aged-fullstack-development.references.backend-module",
+      "file": "skills/aged-fullstack-development/references/backend-module.md",
+      "output": "aged-fullstack-development/references/backend-module.md",
       "description": "按 module-first 方式实现 FastAPI 后端模块，默认走 router、service、Session 与 ORM model 路径。"
     },
     {
-      "id": "aged-fullstack-frontend-feature",
-      "file": "skills/aged-fullstack-frontend-feature/SKILL.md",
-      "output": "aged-fullstack-frontend-feature/SKILL.md",
+      "id": "aged-fullstack-development.references.frontend-feature",
+      "file": "skills/aged-fullstack-development/references/frontend-feature.md",
+      "output": "aged-fullstack-development/references/frontend-feature.md",
       "description": "按 aged 前端默认路径实现功能：service、axios、interceptors、hooks、pages 与 components。"
     },
     {
-      "id": "aged-fullstack-integration-gate",
-      "file": "skills/aged-fullstack-integration-gate/SKILL.md",
-      "output": "aged-fullstack-integration-gate/SKILL.md",
+      "id": "aged-fullstack-development.references.integration-gate",
+      "file": "skills/aged-fullstack-development/references/integration-gate.md",
+      "output": "aged-fullstack-development/references/integration-gate.md",
       "description": "对齐前后端契约、错误结构与关键验证命令，在收尾前完成最小联调校验。"
     }
   ]

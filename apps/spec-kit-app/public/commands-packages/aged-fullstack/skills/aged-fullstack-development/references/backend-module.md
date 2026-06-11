@@ -1,11 +1,6 @@
----
-name: aged-fullstack-backend-module
-description: 按 module-first 方式实现 FastAPI 后端模块，默认走 router、service、Session 与 ORM model 路径。
----
-
 # 按 aged 默认路径实现后端模块
 
-这个 skill 用于在 `aged-*` 项目里按统一方式实现或修改 FastAPI 模块。
+这个 reference 用于在 `aged-*` 项目里按统一方式实现或修改 FastAPI 模块。
 
 ## 默认模块结构
 
