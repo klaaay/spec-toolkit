@@ -1,0 +1,75 @@
+{
+  "package": "mattpocock-skills",
+  "version": "1.0.0",
+  "category": "效率工具",
+  "commands": [],
+  "upstream": {
+    "repo": "https://github.com/mattpocock/skills",
+    "path": "skills/productivity",
+    "branch": "main",
+    "sourceVersion": "66f92b61f5b1434a1c7422f6fbd8efc5ee0c0214",
+    "syncedAt": "2026-07-06"
+  },
+  "skills": [
+    {
+      "id": "grill-me",
+      "file": "skills/grill-me/SKILL.md",
+      "output": "grill-me/SKILL.md",
+      "description": "用户手动调用的入口：启动一次 `/grilling` 追问会话，用高强度提问打磨计划或设计。"
+    },
+    {
+      "id": "grilling",
+      "file": "skills/grilling/SKILL.md",
+      "output": "grilling/SKILL.md",
+      "description": "围绕计划或设计持续追问，逐个解决决策树上的分支，直到双方形成共同理解。"
+    },
+    {
+      "id": "handoff",
+      "file": "skills/handoff/SKILL.md",
+      "output": "handoff/SKILL.md",
+      "description": "把当前对话压缩成交接文档，保存到系统临时目录，方便另一个 Agent 接手。"
+    },
+    {
+      "id": "teach",
+      "file": "skills/teach/SKILL.md",
+      "output": "teach/SKILL.md",
+      "description": "在当前目录建立状态化教学工作区，围绕用户任务分多次会话教授新技能或概念。"
+    },
+    {
+      "id": "teach.references.glossary-format",
+      "file": "skills/teach/GLOSSARY-FORMAT.md",
+      "output": "teach/GLOSSARY-FORMAT.md",
+      "description": "教学工作区 `GLOSSARY.md` 的格式、写作规则与示例。"
+    },
+    {
+      "id": "teach.references.learning-record-format",
+      "file": "skills/teach/LEARNING-RECORD-FORMAT.md",
+      "output": "teach/LEARNING-RECORD-FORMAT.md",
+      "description": "教学工作区学习记录的编号、模板与写入时机。"
+    },
+    {
+      "id": "teach.references.mission-format",
+      "file": "skills/teach/MISSION-FORMAT.md",
+      "output": "teach/MISSION-FORMAT.md",
+      "description": "教学工作区 `MISSION.md` 的格式、边界与更新规则。"
+    },
+    {
+      "id": "teach.references.resources-format",
+      "file": "skills/teach/RESOURCES-FORMAT.md",
+      "output": "teach/RESOURCES-FORMAT.md",
+      "description": "教学工作区 `RESOURCES.md` 的知识来源、社区资源与维护规则。"
+    },
+    {
+      "id": "writing-great-skills",
+      "file": "skills/writing-great-skills/SKILL.md",
+      "output": "writing-great-skills/SKILL.md",
+      "description": "编写和编辑高质量 Skill 的参考：用术语、层级和删减原则提升可预测性。"
+    },
+    {
+      "id": "writing-great-skills.glossary",
+      "file": "skills/writing-great-skills/GLOSSARY.md",
+      "output": "writing-great-skills/GLOSSARY.md",
+      "description": "高质量 Skill 写作的术语表：调用、信息层级、引导与删减相关概念。"
+    }
+  ]
+}
