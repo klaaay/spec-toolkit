@@ -1,13 +1,18 @@
 {
   "package": "mattpocock-skills",
-  "version": "1.0.0",
+  "version": "v1.0.1-106-g66f92b6",
   "category": "效率工具",
   "commands": [],
   "upstream": {
     "repo": "https://github.com/mattpocock/skills",
     "path": "skills/productivity",
+    "paths": ["skills/productivity", "skills/engineering", "docs/productivity", "docs/engineering"],
     "branch": "main",
+    "describe": "v1.0.1-106-g66f92b6",
+    "latestTag": "v1.0.1",
+    "commitsSinceTag": 106,
     "sourceVersion": "66f92b61f5b1434a1c7422f6fbd8efc5ee0c0214",
+    "sourceDate": "2026-07-05",
     "syncedAt": "2026-07-06"
   },
   "skills": [
@@ -66,10 +71,337 @@
       "description": "编写和编辑高质量 Skill 的参考：用术语、层级和删减原则提升可预测性。"
     },
     {
-      "id": "writing-great-skills.glossary",
+      "id": "writing-great-skills.references.glossary",
       "file": "skills/writing-great-skills/GLOSSARY.md",
       "output": "writing-great-skills/GLOSSARY.md",
       "description": "高质量 Skill 写作的术语表：调用、信息层级、引导与删减相关概念。"
+    },
+    {
+      "id": "ask-matt",
+      "file": "skills/ask-matt/SKILL.md",
+      "output": "ask-matt/SKILL.md",
+      "description": "整套 Matt Pocock engineering/productivity Skill 的 router：根据当前情况选择 Skill 或 flow。"
+    },
+    {
+      "id": "setup-matt-pocock-skills",
+      "file": "skills/setup-matt-pocock-skills/SKILL.md",
+      "output": "setup-matt-pocock-skills/SKILL.md",
+      "description": "为 repo 初始化 engineering Skill 配置：issue tracker、triage labels 和 domain docs。"
+    },
+    {
+      "id": "setup-matt-pocock-skills.references.issue-tracker-github",
+      "file": "skills/setup-matt-pocock-skills/issue-tracker-github.md",
+      "output": "setup-matt-pocock-skills/issue-tracker-github.md",
+      "description": "GitHub issue tracker 配置模板。"
+    },
+    {
+      "id": "setup-matt-pocock-skills.references.issue-tracker-gitlab",
+      "file": "skills/setup-matt-pocock-skills/issue-tracker-gitlab.md",
+      "output": "setup-matt-pocock-skills/issue-tracker-gitlab.md",
+      "description": "GitLab issue tracker 配置模板。"
+    },
+    {
+      "id": "setup-matt-pocock-skills.references.issue-tracker-local",
+      "file": "skills/setup-matt-pocock-skills/issue-tracker-local.md",
+      "output": "setup-matt-pocock-skills/issue-tracker-local.md",
+      "description": "本地 Markdown issue tracker 配置模板。"
+    },
+    {
+      "id": "setup-matt-pocock-skills.references.triage-labels",
+      "file": "skills/setup-matt-pocock-skills/triage-labels.md",
+      "output": "setup-matt-pocock-skills/triage-labels.md",
+      "description": "triage label canonical roles 与实际 label 映射模板。"
+    },
+    {
+      "id": "setup-matt-pocock-skills.references.domain",
+      "file": "skills/setup-matt-pocock-skills/domain.md",
+      "output": "setup-matt-pocock-skills/domain.md",
+      "description": "domain docs 布局配置模板。"
+    },
+    {
+      "id": "grill-with-docs",
+      "file": "skills/grill-with-docs/SKILL.md",
+      "output": "grill-with-docs/SKILL.md",
+      "description": "main flow 起点：运行 grilling，并同步沉淀 glossary 与 ADR。"
+    },
+    {
+      "id": "to-prd",
+      "file": "skills/to-prd/SKILL.md",
+      "output": "to-prd/SKILL.md",
+      "description": "把已经对齐的 conversation 和 codebase 理解合成为 PRD，并发布到 issue tracker。"
+    },
+    {
+      "id": "to-issues",
+      "file": "skills/to-issues/SKILL.md",
+      "output": "to-issues/SKILL.md",
+      "description": "把 plan / spec / PRD 拆成按 dependency order 排列、可独立领取的 tracer-bullet issues。"
+    },
+    {
+      "id": "implement",
+      "file": "skills/implement/SKILL.md",
+      "output": "implement/SKILL.md",
+      "description": "基于 PRD 或 issues 执行实现：驱动 TDD、typecheck、test suite、review 和 commit。"
+    },
+    {
+      "id": "code-review",
+      "file": "skills/code-review/SKILL.md",
+      "output": "code-review/SKILL.md",
+      "description": "main flow 尾部 review：按 Standards 与 Spec 两条轴线审查 fixed point 以来的 diff。"
+    },
+    {
+      "id": "triage",
+      "file": "skills/triage/SKILL.md",
+      "output": "triage/SKILL.md",
+      "description": "issue/PR 入口维护：分类、验证、必要时 grill，并写 ready-for-agent brief。"
+    },
+    {
+      "id": "triage.references.agent-brief",
+      "file": "skills/triage/AGENT-BRIEF.md",
+      "output": "triage/AGENT-BRIEF.md",
+      "description": "ready-for-agent brief 的写作模板。"
+    },
+    {
+      "id": "triage.references.out-of-scope",
+      "file": "skills/triage/OUT-OF-SCOPE.md",
+      "output": "triage/OUT-OF-SCOPE.md",
+      "description": "记录已拒绝请求与 wontfix 判断的模板。"
+    },
+    {
+      "id": "tdd",
+      "file": "skills/tdd/SKILL.md",
+      "output": "tdd/SKILL.md",
+      "description": "red-green loop：一次一个 behaviour，用 test-first 方式构建 feature 或修 bug。"
+    },
+    {
+      "id": "tdd.references.tests",
+      "file": "skills/tdd/tests.md",
+      "output": "tdd/tests.md",
+      "description": "TDD 中测试位置、测试边界和 expected values 的参考规则。"
+    },
+    {
+      "id": "tdd.references.mocking",
+      "file": "skills/tdd/mocking.md",
+      "output": "tdd/mocking.md",
+      "description": "mocking 策略：何时 mock、何时使用真实实现、如何避免 tautological tests。"
+    },
+    {
+      "id": "diagnosing-bugs",
+      "file": "skills/diagnosing-bugs/SKILL.md",
+      "output": "diagnosing-bugs/SKILL.md",
+      "description": "hard bugs / performance regressions 的 diagnosis loop：先建立 tight feedback loop，再定位根因。",
+      "scripts": [
+        {
+          "id": "hitl-loop-template",
+          "file": "skills/diagnosing-bugs/scripts/hitl-loop.template.sh",
+          "description": "human-in-the-loop repro loop 的 shell 模板。"
+        }
+      ]
+    },
+    {
+      "id": "prototype",
+      "file": "skills/prototype/SKILL.md",
+      "output": "prototype/SKILL.md",
+      "description": "构建 throwaway prototype，用来回答 logic/state model 或 UI design question。"
+    },
+    {
+      "id": "prototype.references.logic",
+      "file": "skills/prototype/LOGIC.md",
+      "output": "prototype/LOGIC.md",
+      "description": "logic/state model prototype 的交互式 terminal app 指南。"
+    },
+    {
+      "id": "prototype.references.ui",
+      "file": "skills/prototype/UI.md",
+      "output": "prototype/UI.md",
+      "description": "UI prototype 的多方案 route、floating switcher 与视觉探索指南。"
+    },
+    {
+      "id": "research",
+      "file": "skills/research/SKILL.md",
+      "output": "research/SKILL.md",
+      "description": "基于 primary sources 委派阅读 legwork，并把结论保存为带 citation 的 Markdown。"
+    },
+    {
+      "id": "resolving-merge-conflicts",
+      "file": "skills/resolving-merge-conflicts/SKILL.md",
+      "output": "resolving-merge-conflicts/SKILL.md",
+      "description": "按 intent 解决进行中的 git merge / rebase conflict，并完成操作。"
+    },
+    {
+      "id": "improve-codebase-architecture",
+      "file": "skills/improve-codebase-architecture/SKILL.md",
+      "output": "improve-codebase-architecture/SKILL.md",
+      "description": "周期性 codebase health pass：寻找 deepening opportunities，输出 HTML report，再 grill 选中候选。"
+    },
+    {
+      "id": "improve-codebase-architecture.references.html-report",
+      "file": "skills/improve-codebase-architecture/HTML-REPORT.md",
+      "output": "improve-codebase-architecture/HTML-REPORT.md",
+      "description": "deepening opportunity HTML report 的结构、卡片内容与视觉要求。"
+    },
+    {
+      "id": "codebase-design",
+      "file": "skills/codebase-design/SKILL.md",
+      "output": "codebase-design/SKILL.md",
+      "description": "共享 deep-module vocabulary：module、interface、depth、seam、adapter、leverage、locality。"
+    },
+    {
+      "id": "codebase-design.references.deepening",
+      "file": "skills/codebase-design/DEEPENING.md",
+      "output": "codebase-design/DEEPENING.md",
+      "description": "识别和描述 deepening opportunity 的参考。"
+    },
+    {
+      "id": "codebase-design.references.design-it-twice",
+      "file": "skills/codebase-design/DESIGN-IT-TWICE.md",
+      "output": "codebase-design/DESIGN-IT-TWICE.md",
+      "description": "Design it twice：用两种设计路线比较 interface 和 seam 的参考。"
+    },
+    {
+      "id": "domain-modeling",
+      "file": "skills/domain-modeling/SKILL.md",
+      "output": "domain-modeling/SKILL.md",
+      "description": "维护 ubiquitous language：固定 domain terms，更新 CONTEXT.md，并在必要时写 ADR。"
+    },
+    {
+      "id": "domain-modeling.references.context-format",
+      "file": "skills/domain-modeling/CONTEXT-FORMAT.md",
+      "output": "domain-modeling/CONTEXT-FORMAT.md",
+      "description": "CONTEXT.md glossary 的格式、边界和写入规则。"
+    },
+    {
+      "id": "domain-modeling.references.adr-format",
+      "file": "skills/domain-modeling/ADR-FORMAT.md",
+      "output": "domain-modeling/ADR-FORMAT.md",
+      "description": "ADR 的写作格式和 hard-to-reverse decision 判断规则。"
+    }
+  ],
+  "docs": [
+    {
+      "id": "docs.productivity.grill-me",
+      "file": "docs/productivity/grill-me.md",
+      "source": "docs/productivity/grill-me.md",
+      "description": "`grill-me` 的用户手册：stateless 追问入口、使用时机和与 `grilling` / `grill-with-docs` 的关系。"
+    },
+    {
+      "id": "docs.productivity.grilling",
+      "file": "docs/productivity/grilling.md",
+      "source": "docs/productivity/grilling.md",
+      "description": "`grilling` 的用户手册：design tree、shared understanding 与 primitive 定位。"
+    },
+    {
+      "id": "docs.productivity.handoff",
+      "file": "docs/productivity/handoff.md",
+      "source": "docs/productivity/handoff.md",
+      "description": "`handoff` 的用户手册：handoff document、compaction 和安全交接。"
+    },
+    {
+      "id": "docs.productivity.teach",
+      "file": "docs/productivity/teach.md",
+      "source": "docs/productivity/teach.md",
+      "description": "`teach` 的用户手册：长期教学 workspace、mission、lesson 和 learning records。"
+    },
+    {
+      "id": "docs.productivity.writing-great-skills",
+      "file": "docs/productivity/writing-great-skills.md",
+      "source": "docs/productivity/writing-great-skills.md",
+      "description": "`writing-great-skills` 的用户手册：predictability、context load、cognitive load 和 Skill 写作杠杆。"
+    },
+    {
+      "id": "docs.engineering.ask-matt",
+      "file": "docs/engineering/ask-matt.md",
+      "source": "docs/engineering/ask-matt.md",
+      "description": "`ask-matt` 的用户手册：作为整套 Skill 的 router，选择正确 flow。"
+    },
+    {
+      "id": "docs.engineering.code-review",
+      "file": "docs/engineering/code-review.md",
+      "source": "docs/engineering/code-review.md",
+      "description": "`code-review` 的用户手册：按 Standards 与 Spec 两条独立轴线审查 diff。"
+    },
+    {
+      "id": "docs.engineering.codebase-design",
+      "file": "docs/engineering/codebase-design.md",
+      "source": "docs/engineering/codebase-design.md",
+      "description": "`codebase-design` 的用户手册：deep module、seam、interface、leverage 和 locality。"
+    },
+    {
+      "id": "docs.engineering.diagnosing-bugs",
+      "file": "docs/engineering/diagnosing-bugs.md",
+      "source": "docs/engineering/diagnosing-bugs.md",
+      "description": "`diagnosing-bugs` 的用户手册：tight feedback loop、repro、hypothesis 与 regression test。"
+    },
+    {
+      "id": "docs.engineering.domain-modeling",
+      "file": "docs/engineering/domain-modeling.md",
+      "source": "docs/engineering/domain-modeling.md",
+      "description": "`domain-modeling` 的用户手册：ubiquitous language、CONTEXT.md 与 ADR。"
+    },
+    {
+      "id": "docs.engineering.grill-with-docs",
+      "file": "docs/engineering/grill-with-docs.md",
+      "source": "docs/engineering/grill-with-docs.md",
+      "description": "`grill-with-docs` 的用户手册：带 glossary 和 ADR 记录的 grilling。"
+    },
+    {
+      "id": "docs.engineering.implement",
+      "file": "docs/engineering/implement.md",
+      "source": "docs/engineering/implement.md",
+      "description": "`implement` 的用户手册：基于 PRD 或 issues 执行实现、测试、review 和 commit。"
+    },
+    {
+      "id": "docs.engineering.improve-codebase-architecture",
+      "file": "docs/engineering/improve-codebase-architecture.md",
+      "source": "docs/engineering/improve-codebase-architecture.md",
+      "description": "`improve-codebase-architecture` 的用户手册：寻找 deepening opportunity 并输出 HTML report。"
+    },
+    {
+      "id": "docs.engineering.prototype",
+      "file": "docs/engineering/prototype.md",
+      "source": "docs/engineering/prototype.md",
+      "description": "`prototype` 的用户手册：用 throwaway 程序回答一个 design question。"
+    },
+    {
+      "id": "docs.engineering.research",
+      "file": "docs/engineering/research.md",
+      "source": "docs/engineering/research.md",
+      "description": "`research` 的用户手册：从 primary sources 委派阅读，并产出带 citation 的 Markdown。"
+    },
+    {
+      "id": "docs.engineering.resolving-merge-conflicts",
+      "file": "docs/engineering/resolving-merge-conflicts.md",
+      "source": "docs/engineering/resolving-merge-conflicts.md",
+      "description": "`resolving-merge-conflicts` 的用户手册：按 intent 解决 merge / rebase conflict。"
+    },
+    {
+      "id": "docs.engineering.setup-matt-pocock-skills",
+      "file": "docs/engineering/setup-matt-pocock-skills.md",
+      "source": "docs/engineering/setup-matt-pocock-skills.md",
+      "description": "`setup-matt-pocock-skills` 的用户手册：为 repo 配置 issue tracker、triage labels 和 domain docs。"
+    },
+    {
+      "id": "docs.engineering.tdd",
+      "file": "docs/engineering/tdd.md",
+      "source": "docs/engineering/tdd.md",
+      "description": "`tdd` 的用户手册：red-green loop、tracer bullet 和 vertical slice。"
+    },
+    {
+      "id": "docs.engineering.to-issues",
+      "file": "docs/engineering/to-issues.md",
+      "source": "docs/engineering/to-issues.md",
+      "description": "`to-issues` 的用户手册：把 PRD 或 spec 拆成可独立领取的 vertical slice issues。"
+    },
+    {
+      "id": "docs.engineering.to-prd",
+      "file": "docs/engineering/to-prd.md",
+      "source": "docs/engineering/to-prd.md",
+      "description": "`to-prd` 的用户手册：把已对齐的 conversation 和 codebase 理解合成为 PRD。"
+    },
+    {
+      "id": "docs.engineering.triage",
+      "file": "docs/engineering/triage.md",
+      "source": "docs/engineering/triage.md",
+      "description": "`triage` 的用户手册：验证 issue / PR，应用 category 与 state role，并产出 ready-for-agent brief。"
     }
   ]
 }
