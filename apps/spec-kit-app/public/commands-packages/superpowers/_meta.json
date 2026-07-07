@@ -1,6 +1,6 @@
 {
   "package": "superpowers",
-  "version": "5.0.6",
+  "version": "6.1.1",
   "category": "SDD-Spec开发",
   "commands": [],
   "agents": [
@@ -8,7 +8,7 @@
       "id": "superpowers-code-reviewer",
       "file": "agents/superpowers-code-reviewer.md",
       "output": "superpowers-code-reviewer.md",
-      "description": "高级 code reviewer，按计划和标准审查已完成的工作。"
+      "description": "兼容用 code reviewer agent，按计划、需求和代码质量标准审查已完成工作。"
     }
   ],
   "skills": [
@@ -16,7 +16,7 @@
       "id": "superpowers-using-superpowers",
       "file": "skills/superpowers-using-superpowers/SKILL.md",
       "output": "superpowers-using-superpowers/SKILL.md",
-      "description": "会话起始时使用：建立如何发现、判断并调用 superpowers skills 的总入口规则。"
+      "description": "会话起始时使用：建立如何发现并使用 superpowers skills 的总入口规则。"
     },
     {
       "id": "superpowers-using-superpowers.references.codex-tools",
@@ -25,10 +25,16 @@
       "description": "Superpowers 在 Codex 环境中的工具映射与使用约定。"
     },
     {
-      "id": "superpowers-using-superpowers.references.gemini-tools",
-      "file": "skills/superpowers-using-superpowers/references/gemini-tools.md",
-      "output": "superpowers-using-superpowers/references/gemini-tools.md",
-      "description": "Superpowers 在 Gemini CLI 环境中的工具映射与使用约定。"
+      "id": "superpowers-using-superpowers.references.pi-tools",
+      "file": "skills/superpowers-using-superpowers/references/pi-tools.md",
+      "output": "superpowers-using-superpowers/references/pi-tools.md",
+      "description": "Superpowers 在 Pi 环境中的工具映射与使用约定。"
+    },
+    {
+      "id": "superpowers-using-superpowers.references.antigravity-tools",
+      "file": "skills/superpowers-using-superpowers/references/antigravity-tools.md",
+      "output": "superpowers-using-superpowers/references/antigravity-tools.md",
+      "description": "Superpowers 在 Antigravity CLI 环境中的工具映射与使用约定。"
     },
     {
       "id": "superpowers-receiving-code-review",
@@ -115,7 +121,7 @@
       "id": "superpowers-using-git-worktrees",
       "file": "skills/superpowers-using-git-worktrees/SKILL.md",
       "output": "superpowers-using-git-worktrees/SKILL.md",
-      "description": "在开始功能实现或执行实施计划前，创建并验证隔离的 git worktree 工作区，并同步原目录的 .env.local。"
+      "description": "在开始功能实现或执行实施计划前，确认隔离工作区；优先使用平台原生 worktree，必要时回退到 git worktree。"
     },
     {
       "id": "superpowers-finishing-a-development-branch",
@@ -127,7 +133,24 @@
       "id": "superpowers-subagent-driven-development",
       "file": "skills/superpowers-subagent-driven-development/SKILL.md",
       "output": "superpowers-subagent-driven-development/SKILL.md",
-      "description": "同会话执行计划：每任务新 subagent，任务间 code review 检查点。"
+      "description": "同会话执行计划：每任务新 subagent，任务后 task review，最终整分支 review。",
+      "scripts": [
+        {
+          "id": "task-brief",
+          "file": "skills/superpowers-subagent-driven-development/scripts/task-brief",
+          "description": "从实施计划中提取指定任务全文，生成实现者读取的 task brief 文件。"
+        },
+        {
+          "id": "review-package",
+          "file": "skills/superpowers-subagent-driven-development/scripts/review-package",
+          "description": "生成包含 commit list、stat summary 和完整 diff 的 review package 文件。"
+        },
+        {
+          "id": "sdd-workspace",
+          "file": "skills/superpowers-subagent-driven-development/scripts/sdd-workspace",
+          "description": "创建并返回 SDD 使用的 .superpowers/sdd 临时工作目录。"
+        }
+      ]
     },
     {
       "id": "superpowers-subagent-driven-development.implementer-prompt",
@@ -136,16 +159,10 @@
       "description": "实现者子代理提示模板，用于分派实现者子代理。"
     },
     {
-      "id": "superpowers-subagent-driven-development.spec-reviewer-prompt",
-      "file": "skills/superpowers-subagent-driven-development/spec-reviewer-prompt.md",
-      "output": "superpowers-subagent-driven-development/spec-reviewer-prompt.md",
-      "description": "规范合规性审查者提示模板，用于分派规范合规性审查者子代理。"
-    },
-    {
-      "id": "superpowers-subagent-driven-development.code-quality-reviewer-prompt",
-      "file": "skills/superpowers-subagent-driven-development/code-quality-reviewer-prompt.md",
-      "output": "superpowers-subagent-driven-development/code-quality-reviewer-prompt.md",
-      "description": "代码质量审查者提示模板，用于分派代码质量审查者子代理。"
+      "id": "superpowers-subagent-driven-development.task-reviewer-prompt",
+      "file": "skills/superpowers-subagent-driven-development/task-reviewer-prompt.md",
+      "output": "superpowers-subagent-driven-development/task-reviewer-prompt.md",
+      "description": "任务审查者提示模板，用于一次性审查 spec compliance 和 code quality。"
     },
     {
       "id": "the-elements-of-style.writing-clearly-and-concisely",

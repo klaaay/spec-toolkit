@@ -7,7 +7,7 @@
 **适用时机：** 设计文档已经写入 `docs/superpowers/specs/`
 
 ```
-任务工具（通用目的）:
+Subagent (general-purpose):
   description: "审查设计文档"
   prompt: |
     你是一名设计文档审查者。请确认这份 spec 是否完整，并且已经准备好进入实施规划阶段。

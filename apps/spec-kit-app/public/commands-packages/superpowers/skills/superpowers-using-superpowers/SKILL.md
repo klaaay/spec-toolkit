@@ -1,94 +1,62 @@
 ---
 name: superpowers-using-superpowers
-description: 在任何会话开始时使用：建立如何发现、判断并调用 superpowers skills 的总入口规则
+description: 会话开始时使用：建立如何发现并使用 skills，要求在任何回应或动作前先判断并调用适用 skill
 ---
 
 <SUBAGENT-STOP>
-如果你是被派发出来执行某个具体任务的子代理，请跳过这个 skill。
+如果你是被分派来执行某个具体任务的子代理，请忽略此 skill。
 </SUBAGENT-STOP>
 
-<extremely-important>
-如果你觉得某个 skill 有哪怕 1% 的可能适用于当前任务，你都必须调用它。
+<EXTREMELY-IMPORTANT>
+只要你认为当前任务有哪怕 1% 的可能适用某个 skill，就必须调用该 skill。
 
-如果有适用的 skill，你没有选择权，必须使用。
-</extremely-important>
+如果某个 skill 适用于当前任务，你没有选择权，必须使用。
 
-## 指令优先级
+这条规则不可协商，也不能用理由绕开。
+</EXTREMELY-IMPORTANT>
 
-superpowers skills 会覆盖默认系统提示中的一部分行为，但**用户指令始终优先**：
+## 规则
 
-1. **用户明确指令**（如 AGENTS.md、直接要求）
-2. **Superpowers skills**
-3. **默认系统提示**
+**在任何回应或动作之前，先调用相关或被点名的 skills**，包括澄清问题、探索代码库、检查文件。如果后来发现不适用，可以不继续使用。
 
-如果用户明确说“不要用 TDD”，而 skill 说“始终用 TDD”，以用户要求为准。
+**进入 plan mode 前：** 如果还没有做过 brainstorm，先调用 `superpowers-brainstorming`。
 
-## 如何访问技能
+随后说明“正在使用 [skill] 来 [目的]”，并严格遵循该 skill。如果它有 checklist，就为每项创建 todo。
 
-不同平台加载 skill 的方式不同：
+## Skill 优先级
 
-- **Claude Code**：用 `Skill` 工具
-- **Gemini CLI**：用 `activate_skill`
-- **Codex / 其他环境**：按平台文档或当前运行环境的原生机制处理
+多个 skill 同时适用时，流程型 skill 优先。它们决定做事方法；实现型 skill 再负责落地。`superpowers-brainstorming` 和 `superpowers-systematic-debugging` 是 Superpowers 最常见的流程型 skill，但这条规则适用于所有 skill。
 
-如果平台原生已经把 skill 放进上下文，就直接遵守其内容。
+- “构建 X” → 先用 `superpowers-brainstorming`，再用实现相关 skill。
+- “修复这个 bug” → 先用 `superpowers-systematic-debugging`，再用领域 skill。
 
-## 平台适配
+## 危险信号
 
-upstream 文档以 Claude Code 工具名为基准。若当前不是 Claude Code：
-
-- Codex：参考 `references/codex-tools.md`
-- Gemini CLI：参考 `references/gemini-tools.md`
-
-# 使用规则
-
-## 铁律
-
-**在做出任何响应或动作之前，先判断并调用相关 skill。**
-
-哪怕只是澄清问题，只要 skill 有可能适用，也应先检查 skill。
-
-```dot
-digraph skill_flow {
-    "收到用户消息" [shape=doublecircle];
-    "可能有 skill 适用吗？" [shape=diamond];
-    "调用相关 skill" [shape=box];
-    "说明正在使用哪个 skill" [shape=box];
-    "按 skill 执行" [shape=box];
-    "正常响应 / 行动" [shape=doublecircle];
-
-    "收到用户消息" -> "可能有 skill 适用吗？";
-    "可能有 skill 适用吗？" -> "调用相关 skill" [label="是，哪怕只有 1%"];
-    "可能有 skill 适用吗？" -> "正常响应 / 行动" [label="确定没有"];
-    "调用相关 skill" -> "说明正在使用哪个 skill";
-    "说明正在使用哪个 skill" -> "按 skill 执行";
-    "按 skill 执行" -> "正常响应 / 行动";
-}
-```
-
-## 这些想法都说明你在自我合理化
+出现以下想法时，立刻停下。你正在合理化跳过流程：
 
 | 想法 | 现实 |
 | --- | --- |
-| “这只是个简单问题” | 简单问题也是任务，也可能对应 skill |
-| “我先看几眼代码再说” | skill 会决定你该怎么探索 |
-| “我记得这个 skill 的内容” | skill 会演进，当前版本才算数 |
-| “先做一步应该没事” | skill 判断必须先于动作 |
-| “这个 skill 有点大材小用” | 小任务更容易因为跳流程而浪费时间 |
+| “这只是个简单问题” | 问题也是任务。先检查 skill。 |
+| “我需要先拿更多上下文” | skill 检查发生在澄清问题之前。 |
+| “我先浏览一下代码库” | skill 会告诉你如何探索。先检查。 |
+| “我快速看一下 git / 文件就好” | 文件没有对话上下文。先检查 skill。 |
+| “我先收集信息” | skill 会告诉你如何收集信息。 |
+| “这不需要正式 skill” | 只要有适用 skill，就使用。 |
+| “我记得这个 skill” | skill 会演进。读取当前版本。 |
+| “这不算任务” | 有动作就算任务。先检查 skill。 |
+| “这个 skill 太重了” | 简单任务也会变复杂。使用 skill。 |
+| “我先做这一步” | 做任何事之前先检查。 |
+| “这样更有效率” | 无纪律的动作会浪费时间。skill 用来避免这点。 |
+| “我知道那是什么意思” | 知道概念不等于使用了 skill。调用它。 |
 
-## skill 优先级
+## 平台适配
 
-当多个 skill 同时可能适用时，按这个顺序：
+如果当前运行环境在下面列表中，读取对应参考文件：
 
-1. **流程型 skill**：决定怎么做，比如 brainstorming、systematic-debugging
-2. **执行型 skill**：指导具体落地，比如 writing-plans、subagent-driven-development
+- Codex：`references/codex-tools.md`
+- Pi：`references/pi-tools.md`
+- Antigravity：`references/antigravity-tools.md`
 
-示例：
-- “我们来做个新功能” → 先 `superpowers-brainstorming`
-- “帮我修个 bug” → 先 `superpowers-systematic-debugging`
-- “spec 已确认，准备进入实现” → 先 `superpowers-using-git-worktrees`，再进入 `superpowers-writing-plans`
+## 用户指令
 
-## 用户指令决定做什么，skill 决定怎么做
-
-用户说“加功能 X”或“修 bug Y”，不等于可以跳过工作流。  
-用户明确要求改变工作流时，才覆盖 skill 默认行为。
+用户指令（`CLAUDE.md`、`AGENTS.md`、`GEMINI.md` 等指令文件，以及用户直接请求）优先于 skills；skills 优先于默认行为。只有当人类伙伴明确要求跳过某个工作流或指令时，才可以跳过。

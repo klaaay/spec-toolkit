@@ -48,6 +48,19 @@ digraph when_to_use {
 3. **并行派发**
 4. **回收结果、检查冲突、统一验证**
 
+### 并行派发方式
+
+在同一轮响应中发出多个子代理分派，它们才会并行执行：
+
+```text
+Subagent (general-purpose): "Fix agent-tool-abort.test.ts failures"
+Subagent (general-purpose): "Fix batch-completion-behavior.test.ts failures"
+Subagent (general-purpose): "Fix tool-approval-race-conditions.test.ts failures"
+# 三个任务并行运行。
+```
+
+同一轮响应里的多个 dispatch = 并行执行；每轮只发一个 = 顺序执行。
+
 ## 好提示词的结构
 
 每个子代理都应拿到：

@@ -356,7 +356,7 @@ $ npm test
 
 ## 测试反模式
 
-添加模拟或测试工具时，阅读 @testing-anti-patterns.md 以避免常见陷阱：
+添加模拟或测试工具时，阅读 [testing-anti-patterns.md](testing-anti-patterns.md) 以避免常见陷阱：
 - 测试模拟行为而不是真实行为
 - 向生产类添加仅测试方法
 - 不理解依赖关系就进行模拟
