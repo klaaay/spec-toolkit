@@ -3,14 +3,7 @@
   "version": "6.1.1",
   "category": "SDD-Spec开发",
   "commands": [],
-  "agents": [
-    {
-      "id": "superpowers-code-reviewer",
-      "file": "agents/superpowers-code-reviewer.md",
-      "output": "superpowers-code-reviewer.md",
-      "description": "兼容用 code reviewer agent，按计划、需求和代码质量标准审查已完成工作。"
-    }
-  ],
+  "agents": [],
   "skills": [
     {
       "id": "superpowers-using-superpowers",
